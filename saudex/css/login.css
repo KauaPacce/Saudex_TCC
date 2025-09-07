@@ -1,0 +1,88 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: url('../img/saudebackground.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+#geral {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: rgba(255,255,255,0.92);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
+    padding: 40px 32px;
+    max-width: 400px;
+    width: 100%;
+}
+
+form {
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+label {
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 6px;
+    font-size: 1.1em;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 12px;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    font-size: 1em;
+    background: #f7f7f7;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #1976d2;
+    outline: none;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #1976d2 0%, #26c6da 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+    transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #1565c0 0%, #00acc1 100%);
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 24px 8px;
+        max-width: 95vw;
+    }
+}
+
+.login-link {
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9em;
+}
