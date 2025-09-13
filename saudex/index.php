@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TCC</title>
+    <title>Saúdex - TCC</title>
+     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-    <h1><a href="Menu.php">Saúdex</a><br></h1>
-    <h1><a href="formPacientes.php">Área Admin</a></h1>
-    <h1><a href="cronograma.php">cronograma</a></h1>
+    <div class="menu-container">
+        <h1>Saúdex</h1>
+        <nav>
+            <a href="Menu.php"><strong>Início</strong></a>
+            <a href="formPacientes.php"><strong>Área Admin</strong></a>
+            <a href="cronograma.php"><strong>Cronograma</strong></a>
+        </nav>
+    </div>
 </body>
 </html>

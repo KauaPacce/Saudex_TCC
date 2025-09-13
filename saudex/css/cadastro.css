@@ -89,9 +89,9 @@ button[type="submit"]:hover {
 }
 
 .login-link {
-    color: #fff;
-    text-decoration: none;
     text-align: center;
     margin-top: 12px;
     font-size: 0.9em;
+    color: #1976d2;
+    text-decoration: none;
 }

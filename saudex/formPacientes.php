@@ -107,7 +107,6 @@
 		</form>
   	</div>
 
-	<h2>RETORNO DO AJAX/JSON</h2>
 	<div id="resposta"> 
 		<!-- dentro desta div fica o retorno -->
 	</div>
