@@ -1,17 +1,25 @@
+<?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    die('Acesso negado');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Gerenciamento de Usuários</title>
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body>
 <div id="geral">
   	<div class="container">
-		<form id="cadastro" action="contrPacientes.php" method="POST">
+        <h2>Área Administrativa - Controle de Usuários</h2>
+		<form id="controle" action="contrAdmin.php" method="POST">
 			<div class="row">
 				<div class="col-25">
 					<label for="cod">Codigo</label>
@@ -26,16 +34,7 @@
 					<label for="Nome">Nome Completo</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome!" required>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-25">
-					<label for="Senha">Senha</label>
-				</div>
-				<div class="col-75">
-					<input type="password" id="Senha" name="Senha" placeholder="Digite a senha!" required>
+					<input type="text" id="Nome" name="Nome" placeholder="Digite o Nome!" >
 				</div>
 			</div>
 
@@ -44,7 +43,7 @@
 					<label for="Email">Email</label>
 				</div>
 				<div class="col-75">
-					<input type="email" id="Email" name="Email" placeholder="seu@email.com" required>
+					<input type="email" id="Email" name="Email" placeholder="seu@email.com" >
 				</div>
 			</div>
 
@@ -53,7 +52,7 @@
 					<label for="Telefone">Telefone</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="Telefone" name="Telefone" placeholder="(00) 00000-0000" required>
+					<input type="text" id="Telefone" name="Telefone" placeholder="(00) 00000-0000" >
 				</div>
 
 			</div>
@@ -62,7 +61,7 @@
 					<label for="cpf">Cpf</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+					<input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" >
 				</div>
 			</div>
 
@@ -71,7 +70,7 @@
 					<label for="cep">Cep</label>
 				</div>
 				<div class="col-75">
-					<input type="text" id="cep" name="cep" placeholder="00000-000" required>
+					<input type="text" id="cep" name="cep" placeholder="00000-000" >
 				</div>
 			</div>
 
@@ -80,7 +79,7 @@
 					<label for="nasc">Nascimento</label>
 				</div>
 				<div class="col-75">
-					<input type="date" name="nasc" id="nasc" max="<?php echo date('Y-m-d'); ?>" required>
+					<input type="date" name="nasc" id="nasc" max="<?php echo date('Y-m-d'); ?>" >
 				</div>
 			</div>
 
@@ -100,9 +99,6 @@
 				<input type="button" id="btnApagar"    value="Excluir"   onclick="Excluir();">
 				<input type="button" id="btnPesquisar" value="Pesquisar" onclick="Pesquisar();">
 				<input type="button" id="btnEditar"    value="Editar"    onclick="Editar();">
-				<input type="button" id="btnImpressao" value="Impressao" onclick="Imprimir();">
-				<input type="button" id="btnGraf_JS"   value="Graf_JS"   onclick="Grafico();">
-				<a href="grf.php"><input type="button" id="Graf_Direto" value="Graf_Direto"></a>
 			</div>
 		</form>
   	</div>
@@ -110,19 +106,24 @@
 	<div id="resposta"> 
 		<!-- dentro desta div fica o retorno -->
 	</div>
-</div> 
-
-	<script src="js/Pacientes.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</div>
 
 <script>
-	//===MASCARA PARA O FORMULARIO =================================
-    $(document).ready(function(){ 
-        $('#cpf').mask('000.000.000-00');
+// Máscaras para os campos
+$(document).ready(function(){ 
+		$('#cpf').mask('000.000.000-00');
 		$('#Telefone').mask('(00) 00000-0000');
 		$('#cep').mask('00000-000');
-    });
+});
+
+
+        $(document).ready(function() {
+            carregarUsuarios();
+        });
 </script>
+
+    <script src="js/Pacientes.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </body>
 </html>

@@ -1,148 +1,195 @@
-//===CADASTRO DE usuarios =========================================
-function Cadastrar()
-{
-    // 1 parte: pegar dados do formulario
-    var DadosForm = $('#cadastro').serialize();
+// A função de mascaramento jQuery deve estar fora de qualquer função
+$(document).ready(function(){ 
+    $('#cpf').mask('000.000.000-00');
+    $('#Telefone').mask('(00) 00000-0000');
+    $('#cep').mask('00000-000');
 
-    // 2 parte: congelar a tela e executar php
+    // Carrega os usuários na inicialização da página
+    carregarUsuarios();
+});
+
+// Função genérica para requisições AJAX
+function enviarRequisicao(acao, dados, sucessoCallback) {
     $.ajax({
-        method: 'GET',
-        url: 'contrPacientes.php?acao=Cadastrar',
-        data: DadosForm,
-        
+        method: 'POST',
+        url: 'contrAdmin.php',
+        data: { acao: acao, ...dados },
         beforeSend: function() {
-            $("h2").html("Inclusao em andamento ...");
-        }
-    })
-
-    // 3 parte: receber msg vindo php e mostrar
-    .done(function(msgPHP){
-        $("h2").html("Retorno da Inclusao...");
-        $("#resposta").html(msgPHP);
-
-        alert(msgPHP);
-    })
-
-    .fail(function(){
-        alert("falha no processo Inclusao");
-    })
-
-    return false;
-}
-
-
-//===EXCLUSAO DE usuarios =========================================
-function Excluir()
-{
-    var DadosForm = $('#cadastro').serialize();
-
-    $.ajax({
-        method: 'GET',
-        url: 'contrPacientes.php?acao=Excluir',
-        data: DadosForm
-    })
-
-    .done(function(msgPHP){
-        alert(msgPHP);
-    })
-
-    .fail(function(){
-        alert("falha na exclusao");
-    })
-
-    return false;
-}
-
-
-//===ALTERAR DE usuarios =========================================
-function Editar()
-{
-    var DadosForm = $('#cadastro').serialize();
-
-    $.ajax({
-        method: 'GET',
-        url: 'contrPacientes.php?acao=Editar',
-        data: DadosForm
-    })
-
-    .done(function(msgPHP){
-        alert(msgPHP);
-    })
-
-    .fail(function(){
-        alert("falha na alteracao");
-    })
-
-    return false;
-}
-
-//===PESQUISA DE usuarios =========================================
-function Pesquisar()
-{
-    // 1 parte: pegar dados do formulario
-    var DadosForm = $('#cadastro').serialize();
-
-    // 2 parte: congelar a tela e executar php
-    $.ajax({
-        method: 'GET',
-        url: 'contrPacientes.php?acao=Pesquisar',
-        data: DadosForm,
-        
-        beforeSend: function() {
-            $("h2").html("Carregando consulta...");
-        }
-    })
-
-    
-
-    // 3 parte: receber dados vindo php e mostrar
-    .done(function(dadosPHP){
-
-        $("h2").html("Dados da Pesquisa...");
-        var usuarios = JSON.parse(dadosPHP);
-
-        //Consulta em Tabela -----------------------------------------
-        var Tabela = '';
-        Tabela += "<table border=1>";
-
-        Tabela += "<tr> <th>cod</th> <th>Nome</th> <th>Senha</th> <th>Email</th> <th>Telefone</th> <th>cpf</th> <th>cep</th> <th>nasc</th> <th>genero</th> </tr>";
-            for(i = 0; i < usuarios.length; i++) {
-                Tabela += "<tr>";
-                    Tabela += "<td>" + usuarios[i].cod       + "</td>";
-                    Tabela += "<td>" + usuarios[i].Nome      + "</td>";
-                    Tabela += "<td>" + usuarios[i].Senha     + "</td>";
-                    Tabela += "<td>" + usuarios[i].Email     + "</td>";
-                    Tabela += "<td>" + usuarios[i].Telefone  + "</td>";
-                    Tabela += "<td>" + usuarios[i].cpf       + "</td>";
-                    Tabela += "<td>" + usuarios[i].cep       + "</td>";
-                    Tabela += "<td>" + usuarios[i].nasc      + "</td>";
-                    Tabela += "<td>" + usuarios[i].genero    + "</td>";
-                Tabela += "</tr>";
+            // Mostrar um indicador de carregamento, se necessário
+        },
+        success: function(response) {
+            try {
+                let resultado = JSON.parse(response);
+                if (resultado.status === 'sucesso') {
+                    if (sucessoCallback) {
+                        sucessoCallback(resultado);
+                    }
+                } else {
+                    alert('Erro: ' + resultado.msg);
+                }
+            } catch (e) {
+                alert('Erro na resposta do servidor: ' + response);
             }
-        Tabela += "</table>";
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert('Falha na requisição: ' + textStatus);
+        }
+    });
+}
 
-        $("#resposta").append(Tabela);
-
-    })
-
-    .fail(function(){
-        alert("falha no processo Pesquisa");
-    })
-
+//===CADASTRO DE USUÁRIOS =========================================
+function Cadastrar() {
+    let dados = $('#controle').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    
+    enviarRequisicao('Cadastrar', dados, function(resultado) {
+        alert(resultado.msg);
+        carregarUsuarios();
+    });
     return false;
 }
 
-$("#resposta2").html('<input type="button" value="Imprima essa página" onclick="window.print();" />');
-//===IMPRESSAO DE PDF =========================================
-function Imprimir()
-{
-   
-document.write('<form action="usuariosImp.php"><input type="submit" value="Listagem"></form>');
+//===EXCLUSAO DE USUÁRIOS =========================================
+function Excluir() {
+    let cod = $('#cod').val();
+    if (!cod) {
+        alert("Por favor, digite o código do usuário para exclusão.");
+        return;
+    }
 
+    if (confirm('Tem certeza que deseja excluir o usuário de código ' + cod + '?')) {
+        enviarRequisicao('Excluir', { cod: cod }, function(resultado) {
+            alert(resultado.msg);
+            carregarUsuarios();
+        });
+    }
+    return false;
 }
 
-//===GERAÇÃO DE GRAFICO =========================================
-function Grafico() 
-{
-document.write('<form action="grf.php"><input type="submit" value="Gráfico"></form>');  
+function excluirUsuario(cod) {
+    if (confirm('Tem certeza que deseja excluir este usuário?')) {
+        enviarRequisicao('Excluir', { cod: cod }, function(resultado) {
+            alert(resultado.msg);
+            carregarUsuarios();
+        });
+    }
+}
+
+//===ALTERAÇÃO DE USUÁRIOS =========================================
+function Editar() {
+    let dados = $('#controle').serializeArray().reduce(function(obj, item) {
+        obj[item.name] = item.value;
+        return obj;
+    }, {});
+    
+    if (!dados.cod) {
+        alert("Por favor, digite o código do usuário para edição.");
+        return;
+    }
+
+    enviarRequisicao('Editar', dados, function(resultado) {
+        alert(resultado.msg);
+        carregarUsuarios();
+    });
+    return false;
+}
+
+//===PESQUISA DE USUÁRIOS =========================================
+function Pesquisar() {
+    let cod = $('#cod').val();
+    let nome = $('#Nome').val();
+
+    if (!cod && !nome) {
+        alert("Por favor, digite um código ou um nome para a pesquisa.");
+        return;
+    }
+
+    enviarRequisicao('Pesquisar', { cod: cod, Nome: nome }, function(resultado) {
+        let tabelaHtml = '<table border="1"><thead><tr><th>Cód</th><th>Nome</th><th>Email</th><th>Telefone</th><th>CPF</th><th>CEP</th><th>Nascimento</th><th>Gênero</th><th>Role</th><th>Ações</th></tr></thead><tbody>';
+        resultado.forEach(usuario => {
+            let acoes = '';
+            if (usuario.role === 'admin') {
+                acoes += `<button onclick="rebaixarUser(${usuario.cod})">Rebaixar</button>`;
+            } else {
+                acoes += `<button onclick="promoverAdmin(${usuario.cod})">Promover</button>`;
+            }
+            acoes += ` <button onclick="excluirUsuario(${usuario.cod})">Excluir</button>`;
+            
+            tabelaHtml += `<tr>
+                <td>${usuario.cod}</td>
+                <td>${usuario.Nome}</td>
+                <td>${usuario.Email}</td>
+                <td>${usuario.Telefone || ''}</td>
+                <td>${usuario.cpf || ''}</td>
+                <td>${usuario.cep || ''}</td>
+                <td>${usuario.nasc || ''}</td>
+                <td>${usuario.genero || ''}</td>
+                <td>${usuario.role}</td>
+                <td>${acoes}</td>
+            </tr>`;
+        });
+        tabelaHtml += '</tbody></table>';
+        $("#resposta").html(tabelaHtml);
+    });
+    return false;
+}
+
+//===AÇÕES DE ADMIN =========================================
+function promoverAdmin(cod) {
+    if (confirm('Tem certeza que deseja promover este usuário a admin?')) {
+        enviarRequisicao('promover', { cod: cod }, function(resultado) {
+            alert(resultado.msg);
+            carregarUsuarios(); // Recarrega a tabela
+        });
+    }
+}
+
+function rebaixarUser(cod) {
+    if (confirm('Tem certeza que deseja rebaixar este usuário?')) {
+        enviarRequisicao('rebaixar', { cod: cod }, function(resultado) {
+            alert(resultado.msg);
+            carregarUsuarios(); // Recarrega a tabela
+        });
+    }
+}
+
+// Funções para a página inicial (formAdmin.php)
+function carregarUsuarios() {
+    $.ajax({
+        type: 'POST',
+        url: 'contrAdmin.php',
+        data: { acao: 'Pesquisar', Nome: '' }, 
+        success: function(response) {
+            try {
+                let usuarios = JSON.parse(response);
+                let tabelaHtml = '<h3>Lista de Usuários</h3><table border="1"><thead><tr><th>Cód</th><th>Nome</th><th>Email</th><th>Role</th><th>Ações</th></tr></thead><tbody id="lista-usuarios">';
+                usuarios.forEach(usuario => {
+                    let acoes = '';
+                    if (usuario.role === 'admin') {
+                        acoes += `<button onclick="rebaixarUser(${usuario.cod})">Rebaixar</button>`;
+                    } else {
+                        acoes += `<button onclick="promoverAdmin(${usuario.cod})">Promover</button>`;
+                    }
+                    acoes += ` <button onclick="excluirUsuario(${usuario.cod})">Excluir</button>`;
+                    
+                    tabelaHtml += `<tr>
+                        <td>${usuario.cod}</td>
+                        <td>${usuario.Nome}</td>
+                        <td>${usuario.Email}</td>
+                        <td>${usuario.role}</td>
+                        <td>${acoes}</td>
+                    </tr>`;
+                });
+                tabelaHtml += '</tbody></table>';
+                $("#resposta").html(tabelaHtml);
+            } catch(e) {
+                alert('Erro ao carregar usuários: ' + response);
+            }
+        },
+        error: function() {
+            alert('Erro ao carregar usuários.');
+        }
+    });
 }

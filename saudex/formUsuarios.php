@@ -86,7 +86,7 @@ function validarFormulario() {
     let senha = document.getElementById("Senha").value;
 	let nome = document.getElementById("Nome").value;
 
-    if (!email.includes("@") || !email.includes(".")) {
+    if (!email.includes("@") || !email.includes(".com")) {
         alert("Digite um email válido!");
         return false;
     }

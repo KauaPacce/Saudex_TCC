@@ -10,14 +10,12 @@ CREATE TABLE usuarios(
     Telefone VARCHAR (15),
     cep VARCHAR (9),
     nasc DATE NOT NULL,
-    genero ENUM ('Masculino','Feminino','Outro')
+    genero ENUM ('Masculino','Feminino','Outro'),
+    role ENUM('admin', 'user') DEFAULT 'user'
 );
 
-CREATE TABLE adm (
-    codAdm INT PRIMARY KEY,
-    criadoEm TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (codAdm) REFERENCES usuarios(cod)
-);
+INSERT INTO usuarios (Nome, Senha, Email, cpf, Telefone, cep, nasc, genero, role) 
+VALUES ('ADMIN', '$2y$10$Dgh7ASzwiDq5Xbgbqpz/We5zjQ8VnnR0Wj28rDwYe7qPSDATp1wWS', 'ADMIN@GMAIL.COM', '321.456.789-01', '(99) 99999-9999', '07654-321', '1999-01-01', 'Outro', 'admin');
 
 CREATE TABLE posts (
     codPost INT AUTO_INCREMENT PRIMARY KEY,

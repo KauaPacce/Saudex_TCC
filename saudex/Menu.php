@@ -22,6 +22,9 @@
         <div class="ms-auto">
           <a href="Medicina.php" class="btn btn-dark me-2">Medicina</a>
           <a href="Ultimas-noticias.php" class="btn btn-secondary me-2">Últimas Notícias</a>
+          <?php
+          if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+          echo '<a href="formAdmin.php" class="btn btn-danger me-2">Área Administrativa</a>';}?>
           <?php if (isset($_SESSION['usuario'])): ?>
             <a href="perfil.php" class="btn btn-outline-primary me-2" title="Perfil">
               <img src="img/iconperfil.png" alt="Perfil" style="width:32px; height:32px;">
