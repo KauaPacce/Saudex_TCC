@@ -40,6 +40,15 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
 			<div class="row">
 				<div class="col-25">
+					<label for="Senha">Senha</label>
+				</div>
+				<div class="col-75">
+					<input type="password" id="Senha" name="Senha" placeholder="Digite a Senha!" >
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-25">
 					<label for="Email">Email</label>
 				</div>
 				<div class="col-75">
@@ -116,14 +125,13 @@ $(document).ready(function(){
 		$('#cep').mask('00000-000');
 });
 
-
         $(document).ready(function() {
             carregarUsuarios();
         });
 </script>
 
-    <script src="js/Pacientes.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+	<script src="js/Admin.js"></script>
 </body>
 </html>

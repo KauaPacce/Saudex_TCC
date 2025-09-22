@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 // Acesso negado se o usuário não for admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
@@ -7,25 +10,29 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// Verifica se a requisição é POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include "clssaudex.php";
     $usuarios = new clssaudex();
 
-    // Filtra os dados de entrada
-    $cod        = filter_input(INPUT_POST, "cod", FILTER_VALIDATE_INT);
-    $Nome       = filter_input(INPUT_POST, "Nome", FILTER_SANITIZE_STRING);
-    $Senha      = filter_input(INPUT_POST, "Senha"); // Senha não precisa de sanitização
-    $Email      = filter_input(INPUT_POST, "Email", FILTER_VALIDATE_EMAIL);
-    $Telefone   = filter_input(INPUT_POST, "Telefone", FILTER_SANITIZE_STRING);
-    $cep        = filter_input(INPUT_POST, "cep", FILTER_SANITIZE_STRING);
-    $cpf        = filter_input(INPUT_POST, "cpf", FILTER_SANITIZE_STRING);
-    $nasc       = filter_input(INPUT_POST, "nasc", FILTER_SANITIZE_STRING);
-    $genero     = filter_input(INPUT_POST, "genero", FILTER_SANITIZE_STRING);
-    $Acao       = filter_input(INPUT_POST, 'acao', FILTER_SANITIZE_STRING);
+
+    // Filtra a ação a ser executada
+    $Acao       = filter_input(INPUT_POST, 'acao');
+
+    
+      // Filtra os dados de entrada
+    $cod        = filter_input(INPUT_POST, "cod");
+    $Nome       = filter_input(INPUT_POST, "Nome");
+    $Senha      = filter_input(INPUT_POST, "Senha");
+    $Email      = filter_input(INPUT_POST, "Email");
+    $Telefone   = filter_input(INPUT_POST, "Telefone");
+    $cep        = filter_input(INPUT_POST, "cep");
+    $cpf        = filter_input(INPUT_POST, "cpf");
+    $nasc       = filter_input(INPUT_POST, "nasc");
+    $genero     = filter_input(INPUT_POST, "genero");
+    
 
     // Hash da senha
-    if ($Senha) {
+    if (!empty($Senha)) {
         $usuarios->setSenha(password_hash($Senha, PASSWORD_DEFAULT));
     }
 
@@ -39,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuarios->setnasc($nasc);
     $usuarios->setgenero($genero);
 
+    
     // Identifica e executa a ação
     switch ($Acao) {
         case 'Cadastrar':
             echo $usuarios->Cadastrar();
             break;
         case 'Excluir':
-            // O ID é necessário para excluir
             if ($cod) {
                 echo $usuarios->Excluir($cod);
             } else {

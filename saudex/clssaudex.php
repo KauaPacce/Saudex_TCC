@@ -153,16 +153,16 @@ class clssaudex
     {
         try {
             if ($codFiltro) {
-                $Matriz = $this->conn->prepare("SELECT cod, Nome, Email, Telefone, cpf, cep, nasc, genero, role FROM usuarios WHERE cod = :cod");
+                $Matriz = $this->conn->prepare("SELECT cod, Nome, Senha, Email, Telefone, cpf, cep, nasc, genero, role FROM usuarios WHERE cod = :cod");
                 $Matriz->bindParam(':cod', $codFiltro);
             } else {
-                $Matriz = $this->conn->prepare("SELECT cod, Nome, Email, Telefone, cpf, cep, nasc, genero, role FROM usuarios WHERE Nome LIKE :Nome");
+                $Matriz = $this->conn->prepare("SELECT cod, Nome, Senha, Email, Telefone, cpf, cep, nasc, genero, role FROM usuarios WHERE Nome LIKE :Nome");
                 $NomeFiltro = '%' . $NomeFiltro . '%'; 
                 $Matriz->bindParam(':Nome', $NomeFiltro);
             }
             $Matriz->execute();
             $usuarios = $Matriz->fetchAll(PDO::FETCH_ASSOC); 
-            return json_encode($usuarios);
+            return json_encode(['status' => 'sucesso', 'data' => $usuarios]);
         } catch (Exception $erro) {
             return json_encode(['status' => 'erro', 'msg' => "Erro de Processo: ". $erro->getMessage()]);        
         }
@@ -235,3 +235,5 @@ class clssaudex
             return json_encode(["status" => "erro", "msg" => $erro->getMessage()]);
         }
     }
+}
+?>

@@ -63,6 +63,15 @@
             </ul>
         </div>
 
+        <div class="card">
+            <h3>Semana 6: Correção de bugs Visuais e implementação de sistema Admin</h3>
+            <p><strong>Objetivo:</strong> </p>
+            <ul>
+                <li></li>
+    
+            </ul>
+        </div>
+
         <div class="card equipe">
             <h3>Equipe do Projeto</h3>
             <ul>

@@ -5,6 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include "clssaudex.php";
 $usuarios = new clssaudex();
 
+
+// Filtra a ação a ser executada
+$Acao       = filter_input(INPUT_POST, 'acao');
+
+
 //-- Recebendo dados do formulario
 $Nome       = filter_input(INPUT_POST, "Nome");
 $Senha      = filter_input(INPUT_POST, "Senha");
@@ -14,19 +19,17 @@ $cep        = filter_input(INPUT_POST, "cep");
 $cpf        = filter_input(INPUT_POST, "cpf");
 $nasc       = filter_input(INPUT_POST, "nasc");
 $genero     = filter_input(INPUT_POST, "genero");
-$Acao       = filter_input(INPUT_POST, 'acao');
 
 
 //-- Enviando para dentro da classe nos atributos
 $usuarios->setNome($Nome);
-$usuarios->setSenha(password_hash($Senha, PASSWORD_DEFAULT)); // Criptografar a senha
+$usuarios->setSenha(password_hash($Senha, PASSWORD_DEFAULT));
 $usuarios->setEmail($Email);
 $usuarios->setTelefone($Telefone);
 $usuarios->setcep($cep);
 $usuarios->setcpf($cpf);
 $usuarios->setnasc($nasc);
 $usuarios->setgenero($genero);
-
 
 
 //-- identificando qual ação executar 

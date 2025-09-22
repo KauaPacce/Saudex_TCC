@@ -1,11 +1,8 @@
-// A função de mascaramento jQuery deve estar fora de qualquer função
+//===MÁSCARAS =========================================
 $(document).ready(function(){ 
     $('#cpf').mask('000.000.000-00');
     $('#Telefone').mask('(00) 00000-0000');
     $('#cep').mask('00000-000');
-
-    // Carrega os usuários na inicialização da página
-    carregarUsuarios();
 });
 
 // Função genérica para requisições AJAX
@@ -108,7 +105,7 @@ function Pesquisar() {
 
     enviarRequisicao('Pesquisar', { cod: cod, Nome: nome }, function(resultado) {
         let tabelaHtml = '<table border="1"><thead><tr><th>Cód</th><th>Nome</th><th>Email</th><th>Telefone</th><th>CPF</th><th>CEP</th><th>Nascimento</th><th>Gênero</th><th>Role</th><th>Ações</th></tr></thead><tbody>';
-        resultado.forEach(usuario => {
+        resultado.data.forEach(usuario => {
             let acoes = '';
             if (usuario.role === 'admin') {
                 acoes += `<button onclick="rebaixarUser(${usuario.cod})">Rebaixar</button>`;
@@ -141,7 +138,7 @@ function promoverAdmin(cod) {
     if (confirm('Tem certeza que deseja promover este usuário a admin?')) {
         enviarRequisicao('promover', { cod: cod }, function(resultado) {
             alert(resultado.msg);
-            carregarUsuarios(); // Recarrega a tabela
+            carregarUsuarios(); 
         });
     }
 }
@@ -150,12 +147,11 @@ function rebaixarUser(cod) {
     if (confirm('Tem certeza que deseja rebaixar este usuário?')) {
         enviarRequisicao('rebaixar', { cod: cod }, function(resultado) {
             alert(resultado.msg);
-            carregarUsuarios(); // Recarrega a tabela
+            carregarUsuarios(); 
         });
     }
 }
 
-// Funções para a página inicial (formAdmin.php)
 function carregarUsuarios() {
     $.ajax({
         type: 'POST',
@@ -165,7 +161,7 @@ function carregarUsuarios() {
             try {
                 let usuarios = JSON.parse(response);
                 let tabelaHtml = '<h3>Lista de Usuários</h3><table border="1"><thead><tr><th>Cód</th><th>Nome</th><th>Email</th><th>Role</th><th>Ações</th></tr></thead><tbody id="lista-usuarios">';
-                usuarios.forEach(usuario => {
+                usuarios.data.forEach(usuario => {
                     let acoes = '';
                     if (usuario.role === 'admin') {
                         acoes += `<button onclick="rebaixarUser(${usuario.cod})">Rebaixar</button>`;
