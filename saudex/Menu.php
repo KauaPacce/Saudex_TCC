@@ -12,9 +12,9 @@
 <body>
 
 <!-- ===== NAVBAR ===== -->
-<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#Informacoes">
+    <a class="navbar-brand" href="#">
       <img src="img/logo_saudex.png" alt="Saúdex Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -200,7 +200,6 @@
         <div class="footer-links d-flex flex-column">
           <p class="mb-2"><i class="fas fa-envelope me-2"></i> contato@saudex.com</p>
           <p class="mb-2"><i class="fas fa-phone me-2"></i> (11) 9999-9999</p>
-          <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> São Paulo, SP</p>
         </div>
       </div>
     </div>

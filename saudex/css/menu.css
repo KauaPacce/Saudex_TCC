@@ -9,9 +9,24 @@
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-        html, body {
-            height: 100%;
-        }
+    .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+}
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    html, body {
+      height: 100%;
+      padding-top: 80px;
+    }
 
     /* ===== TIPOGRAFIA ===== */
     body {
@@ -519,14 +534,4 @@
 
 .text-danger:hover {
     background: #f2fefa !important;
-}
-
-.navbar {
-    z-index: 1000;
-    position: relative;
-}
-
-.container {
-    position: relative;
-    z-index: 1;
 }

@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="img/logo_saudex.png" alt="Saúdex Logo" height="100" class="me-2">
+                    <img src="img/logo_saudex.png" alt="Saúdex Logo" height="141" class="me-2">
                 </a>
                 <div class="d-flex">
                     <a href="Menu.php" class="nav-btn btn-outline-primary">Início</a>
@@ -32,8 +32,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8">
                         <span class="hero-badge"><i class="fas fa-brain me-2"></i>Saúde Mental</span>
-                        <h1 class="display-5 fw-bold mb-3">Compreendendo a Depressão</h1>
-                        <p class="lead mb-4">A depressão é uma condição médica tratável que afeta milhões de pessoas. Entender seus sinais, sintomas e opções de tratamento é o primeiro passo para a recuperação.</p>
+                         <h1 class="display-5 fw-bold mb-3">Compreendendo a Depressão</h1>
+                         <p class="lead mb-4">A depressão é uma condição médica tratável que afeta milhões de pessoas. Entender seus sinais, sintomas e opções de tratamento é o primeiro passo para a recuperação.</p>
                         <div class="d-flex flex-wrap gap-3">
                             <a href="#sintomas" class="btn btn-light btn-lg">Ver Sintomas</a>
                             <a href="#tratamento" class="btn btn-outline-light btn-lg">Opções de Tratamento</a>
@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
                         <h2 class="section-title text-center">Sinais e Sintomas da Depressão</h2>
-                        
+                        <p class="text-center lead mb-5">Os sintomas da depressão podem variar de leves a graves e podem incluir uma combinação de sintomas emocionais e físicos. Se você ou alguém que você conhece está experimentando vários desses sintomas por mais de duas semanas, é importante procurar ajuda profissional.</p>
                         <div class="row g-4 mt-4">
                             <div class="col-md-6">
                                 <div class="info-card p-4 h-100">
@@ -131,9 +131,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
-                       <h2 class="section-title text-center">Opções de Tratamento</h2>
+                        <h2 class="section-title text-center">Opções de Tratamento</h2>
                         <p class="text-center lead mb-5">O tratamento da depressão geralmente envolve uma combinação de terapias. Consulte um profissional de saúde para determinar a abordagem mais adequada para você.</p>
-                        
                         <div class="row g-4">
                             <div class="col-md-4">
                                 <div class="info-card p-4 text-center h-100">
@@ -195,7 +194,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto">
                         <h2 class="section-title text-center">Recursos e Apoio</h2>
-                        
+                        <p class="text-center lead mb-5">Existem muitos recursos disponíveis para ajudar aqueles que vivem com depressão. Aqui estão alguns lugares onde você pode encontrar apoio e informações adicionais.</p>   
                         <div class="resource-card p-4 rounded mt-4">
                             <h4><i class="fas fa-hands-helping me-2"></i>Onde Buscar Ajuda</h4>
                             <div class="row mt-3">
@@ -258,7 +257,6 @@
                     <div class="footer-links d-flex flex-column">
                         <p class="mb-2"><i class="fas fa-envelope me-2"></i> contato@saudex.com</p>
                         <p class="mb-2"><i class="fas fa-phone me-2"></i> (11) 9999-9999</p>
-                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> São Paulo, SP</p>
                     </div>
                 </div>
             </div>
@@ -276,5 +274,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
