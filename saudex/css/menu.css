@@ -1,481 +1,532 @@
-* {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
+:root {
       --primary: #2563eb;
       --primary-dark: #1d4ed8;
+      --secondary: #64748b;
       --accent: #10b981;
-      --accent-light: #34d399;
-      --text: #1f2937;
-      --text-light: #6b7280;
-      --background: #fff;
-      --background-alt: #f9fafb;
-      --border: #e5e7eb;
-      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --radius: 8px;
-      --radius-lg: 12px;
-      --transition: all 0.3s ease;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    body {
-          font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-          color: var(--text);
-          background: var(--background);
-          line-height: 1.6;
-          padding: 20px;
+        html, body {
+            height: 100%;
         }
 
-    .custom-container {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 40px 20px;
-      background: #fff;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
+    /* ===== TIPOGRAFIA ===== */
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background: linear-gradient(135deg, #ecfcff 0%, #c8f5ff 100%);
+      min-height: 100vh;
     }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700;
+      line-height: 1.2;
     }
 
-    .section-subtitle {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--primary);
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      display: block;
+    .display-5 {
+      font-size: 2.5rem;
+      font-weight: 800;
     }
+
+.nav-btn {
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 600;
+    margin: 0 0.25rem;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+/* Efeito de brilho para todos os botões */
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.nav-btn:hover::before {
+    left: 100%;
+}
+
+/* Botões Medicina e Notícias (Outline Azul) */
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-outline-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), #3b82f6);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    border-radius: 50px;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+}
+
+.btn-outline-primary:hover::after {
+    width: 100%;
+}
+
+/* Botão Cadastrar (Outline Verde) */
+.btn-outline-success {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-outline-success::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent), #34d399);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+    border-radius: 50px;
+}
+
+.btn-outline-success:hover {
+    color: white;
+    border-color: transparent;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+.btn-outline-success:hover::after {
+    width: 100%;
+}
+
+/* Botão Entrar (Verde Sólido com Gradiente) */
+.btn-success {
+    background: linear-gradient(135deg, var(--accent), #0da271);
+    border: none;
+    color: white;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-success::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0da271, var(--accent));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    border-radius: 50px;
+}
+
+.btn-success:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.5);
+    color: white;
+}
+
+.btn-success:hover::after {
+    opacity: 1;
+}
+
+/* Efeito de pulso sutil no botão Entrar */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.6);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+}
+
+.btn-success {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Efeito de clique para todos os botões */
+.nav-btn:active {
+    transform: translateY(-1px) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    .nav-btn {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.9rem;
+        margin: 0.2rem;
+    }
+    
+    .nav-btn:hover {
+        transform: none;
+    }
+}
+
+    /* ===== HERO SECTION ===== */
+    .hero-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 4rem 0;
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 3rem;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.health-card {
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: var(--transition);
+  height: 100%;
+  background: white;
+  box-shadow: var(--card-shadow);
+  position: relative;
+}
+
+/* ===== CORES PERSONALIZADAS PARA CADA CARD ===== */
+
+/* Primeiro card - Depressão (ROXO) */
+.row.g-4 > .col-lg-3.col-md-6:nth-child(1) .health-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #a78bfa, #c4b5fd);
+}
+
+/* Segundo card - Ansiedade (LARANJA) */
+.row.g-4 > .col-lg-3.col-md-6:nth-child(2) .health-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #fdba74, #fed7aa);
+}
+
+/* Terceiro card - Obesidade (VERMELHO) */
+.row.g-4 > .col-lg-3.col-md-6:nth-child(3) .health-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #CD5C5C, #F08080);
+}
+
+/* Quarto card - Diabetes (VERDE) */
+.row.g-4 > .col-lg-3.col-md-6:nth-child(4) .health-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, #6ee7b7, #a7f3d0);
+}
+
+/* Ícones com cores combinando */
+.row.g-4 > .col-lg-3.col-md-6:nth-child(1) .card-icon {
+  background: linear-gradient(135deg, #a78bfa, #c4b5fd);
+}
+
+.row.g-4 > .col-lg-3.col-md-6:nth-child(2) .card-icon {
+  background: linear-gradient(135deg, #fdba74, #fed7aa);
+}
+
+.row.g-4 > .col-lg-3.col-md-6:nth-child(3) .card-icon {
+  background: linear-gradient(135deg, #CD5C5C, #F08080);
+}
+
+.row.g-4 > .col-lg-3.col-md-6:nth-child(4) .card-icon {
+  background: linear-gradient(135deg, #6ee7b7, #a7f3d0);
+}
+
+.health-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-size: 1.8rem;
+  color: white;
+}
+
+.card-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(transparent, rgba(0,0,0,0.1));
+}
 
     .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
-    .section-description {
-      font-size: 1.125rem;
-      color: var(--text-light);
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .divider {
-      height: 2px;
-      background: linear-gradient(to right, transparent, var(--border), transparent);
-      margin: 2rem auto;
-      width: 80%;
-    }
-
-    .services-grid, .values-grid, .contact-grid {
-      display: grid;
-      gap: 2rem;
-    }
-    
-    .services-grid { 
-      grid-template-columns: 1fr; 
-      margin-bottom: 3rem;
-    }
-    
-    .values-grid { 
-      grid-template-columns: 1fr; 
-    }
-    
-    .contact-grid { 
-      grid-template-columns: 1fr; 
-      gap: 3rem; 
-    }
-
-    /* Cards */
-    .service-card, .value-card, .contact-form-card, .contact-info-card {
-      background: var(--background-alt);
-      padding: 2rem;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      transition: var(--transition);
-    }
-    
-    .service-card:hover, .value-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    /* Titles & Descriptions */
-    .service-title, .value-title, .contact-form-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-    
-    .service-description, .value-description, .contact-form-description {
-      color: var(--text-light);
-      margin-bottom: 1.5rem;
-    }
-
-    /* Lists */
-    .service-features, .value-details {
-      list-style: none;
-      margin-bottom: 1.5rem;
-      padding: 0;
-    }
-    
-    .service-features li, .value-details li {
       position: relative;
-      padding-left: 1.5rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-light);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
     }
-    
-    .service-features li::before {
-      content: '•';
+
+    .section-title::after {
+      content: '';
       position: absolute;
+      bottom: 0;
       left: 0;
-      color: var(--accent);
-      font-weight: bold;
-    }
-    
-    .value-details li::before {
-      content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
+      width: 590px;
+      height: 5px;
+      background:#10b981; 
+      border-radius: 3px;
     }
 
-    /* Botão Saiba Mais */
-    .service-btn {
-      background: none;
+    .about-card {
       border: none;
-      color: var(--primary);
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
       transition: var(--transition);
+      overflow: hidden;
     }
 
-    .service-btn:hover {
-      gap: 0.75rem;
-      color: var(--primary-dark);
+    .about-card:hover {
+      transform: translateY(-5px);
     }
 
-    /* Formulário de Contato */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .form-input {
-      padding: 0.875rem 1rem;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    }
-
-    .form-submit {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 1rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .form-submit:hover { 
-      background: var(--primary-dark); 
-    }
-
-    /* Contato Cards */
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .contact-info-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.5rem;
-    }
-
-    .contact-info-card-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: rgba(37, 99, 235, 0.1);
+    .about-icon {
+      font-size: 2.5rem;
       color: var(--primary);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .contact-info-card-title {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.25rem;
-    }
-
-    .contact-info-card-info {
-      color: var(--primary);
-      font-weight: 500;
-      margin-bottom: 0.25rem;
-    }
-
-    .contact-info-card-description {
-      color: var(--text-light);
-      font-size: 0.875rem;
-    }
-
-    /* Emergência */
-    .emergency-contact {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid var(--accent-light);
-      padding: 1.5rem;
-      border-radius: var(--radius);
-      text-align: center;
-    }
-
-    .emergency-contact-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: var(--accent);
-      color: #fff;
-      border-radius: 50%;
       margin-bottom: 1rem;
     }
 
-    .emergency-contact-title {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.5rem;
+    /* ===== FOOTER ===== */
+    footer {
+    background: var(--dark);
+    color: white;
+    padding: 3rem 0 1.5rem;
+    margin-top: auto;
     }
 
-    .emergency-contact-number {
-      color: var(--accent);
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: var(--transition);
     }
 
-    .emergency-contact-description {
-      color: var(--text-light);
-      font-size: 0.875rem;
+    .footer-links a:hover {
+      color: white;
+      text-decoration: underline;
     }
 
-    /* Responsividade */
-    @media (min-width: 640px) {
-      .section-title { 
-        font-size: 2.5rem; 
+    /* ===== ANIMAÇÕES ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
-    
-    @media (min-width: 768px) {
-      .services-grid { 
-        grid-template-columns: repeat(2, 1fr); 
+
+    .fade-in {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+
+    /* ===== RESPONSIVIDADE ===== */
+    @media (max-width: 768px) {
+      .display-5 {
+        font-size: 2rem;
       }
       
-      .values-grid { 
-        grid-template-columns: repeat(2, 1fr); 
+      .hero-section {
+        padding: 2.5rem 0;
+        border-radius: 0 0 20px 20px;
       }
       
-      .contact-grid { 
-        grid-template-columns: 1fr 1fr; 
+      .nav-btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+        margin: 0.25rem;
       }
-    }
-    
-    @media (min-width: 1024px) {
-      .services-grid { 
-        grid-template-columns: repeat(3, 1fr); 
+      
+      .card-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
       }
-    }
-    
-    @media (min-width: 1280px) {
-      .values-grid { 
-        grid-template-columns: repeat(4, 1fr); 
-      }
-    }
-    
-    .navbar-brand {
-      padding: 0;
     }
 
+    .text-gradient {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
-/* cards de doenças */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .page-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #2563eb;
-        }
-        
-        .cards-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-        
-        .health-card {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 300px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .health-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .card-image {
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            padding: 20px;
-            color: white;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        
-        .card-description {
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .card-link {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-        }
-        
-        .card-link:hover {
-            text-decoration: underline;
-        }
-        
-        .card-link svg {
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-        }
-        
-        .health-card:hover .card-link svg {
-            transform: translateX(5px);
-        }
-        
-        /* Cores específicas para cada card */
-        .depression-card .card-overlay {
-            background: linear-gradient(to top, rgba(59, 130, 246, 0.85), transparent);
-        }
-        
-        .anxiety-card .card-overlay {
-            background: linear-gradient(to top, rgba(139, 92, 246, 0.85), transparent);
-        }
-        
-        .obesity-card .card-overlay {
-            background: linear-gradient(to top, rgba(16, 185, 129, 0.85), transparent);
-        }
-        
-        .diabetes-card .card-overlay {
-            background: linear-gradient(to top, rgba(245, 158, 11, 0.85), transparent);
-        }
-        
-        /* Imagens de fundo para cada card */
-        .depression-card .card-image {
-            background-image: url('https://previews.123rf.com/images/elenakalinicheva/elenakalinicheva2302/elenakalinicheva230200005/198262969-mental-disorder-concept-depression-woman-stress-despair-anxiety-disorder-fatigue-vector.jpg');
-        }
-        
-        .anxiety-card .card-image {
-            background-image: url('https://sdmntprnorthcentralus.oaiusercontent.com/files/00000000-e318-622f-b52d-b2b49106254a/raw?se=2025-09-13T05%3A06%3A45Z&sp=r&sv=2024-08-04&sr=b&scid=2c6c8544-99ba-509e-a035-de46315248c1&skoid=add8ee7d-5fc7-451e-b06e-a82b2276cf62&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-13T03%3A55%3A25Z&ske=2025-09-14T03%3A55%3A25Z&sks=b&skv=2024-08-04&sig=4L7G9ZQMPnAOeFm3%2BEGwMSXi1m5ruJuyHEZzbvDzG7k%3D');
-        }
-        
-        .obesity-card .card-image {
-            background-image: url('https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auo=format&fit=crop&w=1200&q=80');
-        }t
-        
-        .diabetes-card .card-image {
-            background-image: url('https://assets.clevelandclinic.org/transform/LargeFeatureImage/f52ef1a5-1310-4cec-bc56-c1759042d1f7/glucometer-diabetes-stress-1433938010');
-        }
-        
-        /* Responsividade */
-        @media (min-width: 768px) {
-            .cards-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (min-width: 992px) {
-            .cards-container {
-                grid-template-columns: repeat(3, 1fr); 
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .cards-container {
-                grid-template-columns: repeat(4, 1fr); 
-            }
-        }
-        
-        .back-button {
-            display: inline-block;
-            margin-bottom: 30px;
-            padding: 10px 20px;
-            background-color: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        .back-button:hover {
-            background-color: #1d4ed8;
-            color: white;
-        }
+    .rounded-lg {
+      border-radius: 15px;
+    }
+
+    /* DROPDOWN */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background: linear-gradient(135deg, var(--accent), #0da271) !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 50px !important;
+    padding: 0.5rem 1.5rem !important;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    z-index: 1000;
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; 
+    left: 0; 
+    background: rgb(255, 255, 255);
+    min-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e2e8f0;
+    padding: 0.5rem 0;
+    z-index: 1001; 
+    margin-top: 5px; 
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    animation: fadeInDown 0.3s ease-out;
+}
+
+/* Animação para abrir para baixo */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    display: block;
+    padding: 0.7rem 1.5rem;
+    color: var(--dark);
+    text-decoration: none;
+    transition: var(--transition);
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.dropdown-item:hover {
+    background: #f1f5f9;
+    color: var(--primary);
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+    border-top: 1px solid #e2f0e9;
+}
+
+.text-danger {
+    color: #dc2626 !important;
+}
+
+.text-danger:hover {
+    background: #f2fefa !important;
+}
+
+.navbar {
+    z-index: 1000;
+    position: relative;
+}
+
+.container {
+    position: relative;
+    z-index: 1;
+}

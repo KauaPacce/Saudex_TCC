@@ -56,11 +56,9 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<button type="submit" id="btnEnviar" value="Enviar">Criar Conta</button>
-			</div>
+			<button type="submit" class="btn-criar-conta">Criar Conta</button>
 
-			<div class="login-link"> <!-- precisa ser estilizado -->
+			<div class="login-link">
 				Já possui uma conta? <a href="formLogin.php">Entrar</a>
 			</div>
 		</form>

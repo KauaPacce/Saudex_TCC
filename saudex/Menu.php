@@ -6,267 +6,240 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Saúdex</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/menu.css">
-
 </head>
-<body class="d-flex flex-column min-vh-100">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="img/logo_saudex.png" alt="logo" style="width:200px; height:120px;">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <div class="ms-auto">
-          <a href="Medicina.php" class="btn btn-dark me-2">Medicina</a>
-          <a href="Ultimas-noticias.php" class="btn btn-secondary me-2">Últimas Notícias</a>
-          <?php
-          if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-          echo '<a href="formAdmin.php" class="btn btn-danger me-2">Área Administrativa</a>';}?>
-          <?php if (isset($_SESSION['usuario'])): ?>
-            <a href="perfil.php" class="btn btn-outline-primary me-2" title="Perfil">
-              <img src="img/iconperfil.png" alt="Perfil" style="width:32px; height:32px;">
-            </a>
-          <?php else: ?>
-            <a href="formUsuarios.php" class="btn btn-success me-2">Cadastrar</a>
-            <a href="formLogin.php" class="btn btn-primary">Entrar</a>
-          <?php endif; ?>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#Informacoes">
+      <img src="img/logo_saudex.png" alt="Saúdex Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="ms-auto d-flex align-items-center">
+        <a href="#Informacoes" class="nav-btn btn-outline-primary me-2">Medicina</a>
+        <a href="Ultimas-noticias.php" class="nav-btn btn-outline-primary me-2">Notícias</a>
+        <?php if(isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])): ?>
+        <!-- USUÁRIO LOGADO -->
+        <div class="dropdown">
+    <button class="btn btn-outline-success dropdown-toggle me-2" type="button" data-bs-toggle="dropdown">
+        Olá, <?php echo htmlspecialchars($_SESSION['usuario']['Nome']); ?>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="perfil.php">Meu Perfil</a></li>
+        <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <li><a class="dropdown-item" href="formAdmin.php">Área Admin</a></li>
+        <?php endif; ?>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" href="logout.php">Sair</a></li>
+    </ul>
+</div>
+    <?php else: ?>
+        <!-- USUÁRIO NÃO LOGADO -->
+        <a href="formUsuarios.php" class="nav-btn btn-outline-success me-2">Cadastrar</a>
+        <a href="formLogin.php" class="nav-btn btn-success">Entrar</a>
+    <?php endif; ?>
+</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <span class="hero-badge"><i class="fas fa-heartbeat me-2"></i> Saúde em Primeiro Lugar</span>
+        <h1 class="display-5 fw-bold mb-3">Cuidando de você com <span class="text-success">informação</span> e <span class="text-success">qualidade</span></h1>
+        <p class="lead mb-4">A Saúdex é sua plataforma completa para informações confiáveis sobre saúde, promovendo bem-estar e qualidade de vida.</p>
+        <a href="#Informacoes" class="btn btn-light btn-lg px-4 py-2">Explorar Conteúdo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEÇÃO SOBRE ===== -->
+<section class="container mb-5 fade-in">
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="about-card p-4 h-100">
+        <div class="about-icon">
+          <i class="fas fa-info-circle"></i>
+        </div>
+        <h3 class="text-primary mb-3">Sobre Nós</h3>
+        <p class="mb-0">A Saúdex é uma plataforma dedicada a fornecer informações precisas e serviços na área da saúde, promovendo bem-estar e qualidade de vida através de conteúdo verificado por especialistas.</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="about-card p-4 h-100">
+        <div class="about-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3 class="text-primary mb-3">Nossos Objetivos</h3>
+        <p class="mb-0">Disseminar informações precisas sobre saúde, promover hábitos saudáveis e facilitar o acesso a serviços médicos de qualidade para toda a população.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CARDS DE SAÚDE ===== -->
+<section class="container mb-5">
+  <div class="text-center mb-5 fade-in">
+    <h2 id="Informacoes" class="section-title d-inline-block">Informações sobre Condições de Saúde</h2>
+    <p class="text-muted">Clique em cada card para saber mais sobre essas condições</p>
+  </div>
+  
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6 fade-in delay-1">
+      <div class="card health-card h-100" onclick="window.location.href='Depressao.php'">
+        <div class="card-body text-center p-4">
+          <div class="card-icon depression-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Depressão</h5>
+          <p class="text-muted mb-3">A depressão é um transtorno mental caracterizado por tristeza persistente e perda de interesse em atividades.</p>
+          <a href="Depressao.php" class="btn btn-outline-primary btn-sm">Saiba mais <i class="fas fa-arrow-right ms-1"></i></a>
         </div>
       </div>
     </div>
-  </nav>
 
-  <main class="container my-5 flex-grow-1">
-    <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h2 class="text-primary">Sobre Nós</h2>
-        <p>
-          A Saúdex é uma plataforma dedicada a fornecer informações e serviços na área da saúde,
-          promovendo bem-estar e qualidade de vida.
-        </p>
-      </div>
-    </div>
-
-    <div class="card mb-4 shadow-sm">
-      <div class="card-body">
-        <h2 class="text-primary">Objetivos</h2>
-        <p>
-          Nossos objetivos incluem a disseminação de informações precisas sobre saúde, a promoção de
-          hábitos saudáveis e a facilitação del acesso a serviços médicos.
-        </p>
-      </div>
-    </div>
-  </main>
-
-
-  <!-- card sobre as doenças -->
-<div class="container">     
-      <h1 class="page-title">Informações sobre Condições de Saúde</h1>
-        <div class="cards-container">
-            <!-- Card Depressão -->
-            <div class="health-card depression-card" onclick="window.location.href='Medicina.php'">
-                <div class="card-image">
-                    <div class="card-overlay">
-                        <h3 class="card-title">Depressão</h3>
-                        <p class="card-description">
-                            A depressão é um transtorno mental caracterizado por tristeza persistente, perda de interesse em atividades e diminuição de energia. Afeta como uma pessoa pensa, sente e se comporta, podendo levar a diversos problemas emocionais e físicos.
-                        </p>
-                        <span class="card-link">
-                            Saiba mais 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Card Ansiedade -->
-            <div class="health-card anxiety-card" onclick="window.location.href='Medicina.php'">
-                <div class="card-image">
-                    <div class="card-overlay">
-                        <h3 class="card-title">Ansiedade</h3>
-                        <p class="card-description">
-                            A ansiedade é uma resposta natural ao estresse, mas quando se torna excessiva e persistente, pode caracterizar um transtorno. Sintomas incluem preocupação constante, nervosismo, tensão muscular e taquicardia, interferindo nas atividades diárias.
-                        </p>
-                        <span class="card-link">
-                            Saiba mais 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Card Obesidade -->
-            <div class="health-card obesity-card" onclick="window.location.href='Medicina.php'">
-                <div class="card-image">
-                    <div class="card-overlay">
-                        <h3 class="card-title">Obesidade</h3>
-                        <p class="card-description">
-                            A obesidade é uma condição médica caracterizada pelo acúmulo excessivo de gordura corporal, com potencial impacto negativo na saúde. Está associada a diversas comorbidades, como diabetes tipo 2, doenças cardiovasculares e alguns tipos de câncer.
-                        </p>
-                        <span class="card-link">
-                            Saiba mais 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Card Diabetes -->
-            <div class="health-card diabetes-card" onclick="window.location.href='Medicina.php'">
-                <div class="card-image">
-                    <div class="card-overlay">
-                        <h3 class="card-title">Diabetes</h3>
-                        <p class="card-description">
-                            O diabetes é uma doença metabólica caracterizada pelos níveis elevados de glicose no sangue. Pode resultar da produção insuficiente de insulina (tipo 1) ou da incapacidade do corpo de usar adequadamente a insulina produzida (tipo 2).
-                        </p>
-                        <span class="card-link">
-                            Saiba mais 
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-            </div>
+    <div class="col-lg-3 col-md-6 fade-in delay-2">
+      <div class="card health-card h-100" onclick="window.location.href='Ansiedade.php'">
+        <div class="card-body text-center p-4">
+          <div class="card-icon anxiety-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+          </div>
+          <h5 class="fw-bold mb-3">Ansiedade</h5>
+          <p class="text-muted mb-3">A ansiedade é uma resposta natural ao estresse, mas quando se torna excessiva pode ser um transtorno.</p>
+          <a href="Ansiedade.php" class="btn btn-outline-primary btn-sm">Saiba mais <i class="fas fa-arrow-right ms-1"></i></a>
         </div>
-    </div>
-  <!-- fim do card sobre as doenças -->
-
-    <!-- Seção de Valores -->
-    <div class="section-header">
-      <span class="section-subtitle"></span>
-      <h2 class="section-title">Nossos Valores</h2>
-      <p class="section-description">Os valores morais traduzem nossos princípios e nos permitem uma atuação ética e consistente com nossos objetivos</p>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="values-grid">
-      <div class="value-card">
-        <h3 class="value-title">Confiança</h3>
-        <p class="value-description">Construímos relacionamentos baseados em transparência, ética e credibilidade nas informações.</p>
-        <ul class="value-details">
-          <li>Informações verificadas por especialistas</li>
-          <li>Transparência em todos os processos</li>
-          <li>Compromisso com a verdade científica</li>
-        </ul>
-      </div>
-
-      <div class="value-card">
-        <h3 class="value-title">Compromisso Social</h3>
-        <p class="value-description">Dedicamos nosso trabalho à democratização do acesso à informação de qualidade na área da saúde.</p>
-        <ul class="value-details">
-          <li>Acesso igualitário aos serviços</li>
-          <li>Responsabilidade social</li>
-          <li>Impacto positivo na comunidade</li>
-        </ul>
-      </div>
-
-      <div class="value-card">
-        <h3 class="value-title">Inovação</h3>
-        <p class="value-description">Utilizamos tecnologia avançada para facilitar acesso às informações de saúde confiáveis.</p>
-        <ul class="value-details">
-          <li>Tecnologia de ponta</li>
-          <li>Soluções criativas</li>
-          <li>Melhoria contínua</li>
-        </ul>
-      </div>
-
-      <div class="value-card">
-        <h3 class="value-title">Excelência</h3>
-        <p class="value-description">Buscamos a perfeição em tudo que fazemos, priorizando qualidade em cada aspecto do nosso trabalho.</p>
-        <ul class="value-details">
-          <li>Qualidade superior</li>
-          <li>Profissionais qualificados</li>
-          <li>Busca pela perfeição</li>
-        </ul>
       </div>
     </div>
 
-    <!-- Seção de Contato -->
-    <div class="section-header">
-      <h2 class="section-title">Fale Conosco</h2>
-      <p class="section-description">Entre em contato conosco através dos meios disponíveis abaixo</p>
-    </div>
-
-    <div class="divider"></div>
-
-      <div class="contact-info">
-        <div class="contact-info-card">
-          <div class="contact-info-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
+    <div class="col-lg-3 col-md-6 fade-in delay-1">
+      <div class="card health-card h-100" onclick="window.location.href='Obesidade.php'">
+        <div class="card-body text-center p-4">
+          <div class="card-icon obesity-icon">
+            <i class="fas fa-weight"></i>
           </div>
-          <div class="contact-info-card-content">
-            <h4 class="contact-info-card-title">Telefone</h4>
-            <p class="contact-info-card-info">(11) 9 9999-9999</p>
-            <p class="contact-info-card-description">Seg-Sex: 8h às 18h</p>
-          </div>
+          <h5 class="fw-bold mb-3">Obesidade</h5>
+          <p class="text-muted mb-3">A obesidade é uma condição caracterizada pelo acúmulo excessivo de gordura corporal.</p>
+          <a href="Obesidade.php" class="btn btn-outline-primary btn-sm">Saiba mais <i class="fas fa-arrow-right ms-1"></i></a>
         </div>
+      </div>
+    </div>
 
-        <div class="contact-info-card">
-          <div class="contact-info-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
+    <div class="col-lg-3 col-md-6 fade-in delay-2">
+      <div class="card health-card h-100" onclick="window.location.href='Diabetes.php'">
+        <div class="card-body text-center p-4">
+          <div class="card-icon diabetes-icon">
+            <i class="fas fa-syringe"></i>
           </div>
-          <div class="contact-info-card-content">
-            <h4 class="contact-info-card-title">Email</h4>
-            <p class="contact-info-card-info">contato@saudemais.com.br</p>
-            <p class="contact-info-card-description">Resposta em até 1 dia útil</p>
-          </div>
-        </div>
-
-
-        <div class="emergency-contact">
-          <div class="emergency-contact-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-          </div>
-          <h4 class="emergency-contact-title">Atendimento de Emergência</h4>
-          <p class="emergency-contact-number">192 - SAMU</p>
-          <p class="emergency-contact-description">Disponível 24 horas por dia</p>
+          <h5 class="fw-bold mb-3">Diabetes</h5>
+          <p class="text-muted mb-3">O diabetes é uma doença metabólica caracterizada pelos níveis elevados de glicose no sangue.</p>
+          <a href="Diabetes.php" class="btn btn-outline-primary btn-sm">Saiba mais <i class="fas fa-arrow-right ms-1"></i></a>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <footer class="bg-light mt-auto py-3">
-    <div class="container text-center">
-      <h5 class="text-primary">Fale Conosco</h5>
-      <p class="mb-0">
-        Para mais informações, entre em contato conosco através do nosso e-mail:
-        <strong>contato@saúdex.com.br</strong>.
-      </p>
+<!-- ===== NEWSLETTER ===== -->
+<section class="container mb-5 fade-in">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-lg">
+        <div class="card-body p-5 text-center">
+          <i class="fas fa-envelope-open-text fa-3x text-primary mb-3"></i>
+          <h3 class="mb-3">Fique por dentro das novidades</h3>
+          <p class="text-muted mb-4">Receba informações atualizadas sobre saúde diretamente no seu email</p>
+          <div class="input-group mb-3">
+            <input type="email" class="form-control form-control-lg" placeholder="Seu melhor email">
+            <button class="btn btn-primary btn-lg px-4" type="button">Inscrever</button>
+          </div>
+          <small class="text-muted">Respeitamos sua privacidade. Você pode cancelar a qualquer momento.</small>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+</section>
 
- <script>
-        // Adicionando efeito de clique suave
-        document.querySelectorAll('.health-card').forEach(card => {
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    window.location.href = 'Medicina.php';
-                }, 200);
-            });
-        });
-   </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ===== RODAPÉ ===== -->
+<footer class="fade-in">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 mb-4">
+        <div class="mb-3"><img src="img/logo_saudex.png" alt="Saúdex Logo" height="40" class="me-2"></div>
+        <p class="text-light">Sua plataforma de confiança para informações de saúde baseadas em evidências científicas.</p>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4">
+        <h5 class="mb-3">Links Rápidos</h5>
+        <div class="footer-links d-flex flex-column">
+          <a href="#Informacoes.php" class="mb-2">Medicina</a>
+          <a href="Ultimas-noticias.php" class="mb-2">Notícias</a>
+          <a href="formUsuarios.php" class="mb-2">Cadastrar</a>
+          <a href="formLogin.php" class="mb-2">Entrar</a>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-4">
+        <h5 class="mb-3">Condições</h5>
+        <div class="footer-links d-flex flex-column">
+          <a href="#" class="mb-2">Depressão</a>
+          <a href="#" class="mb-2">Ansiedade</a>
+          <a href="#" class="mb-2">Obesidade</a>
+          <a href="#" class="mb-2">Diabetes</a>
+        </div>
+      </div>
+      <div class="col-lg-3 mb-4">
+        <h5 class="mb-3">Contato</h5>
+        <div class="footer-links d-flex flex-column">
+          <p class="mb-2"><i class="fas fa-envelope me-2"></i> contato@saudex.com</p>
+          <p class="mb-2"><i class="fas fa-phone me-2"></i> (11) 9999-9999</p>
+          <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> São Paulo, SP</p>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" style="border-color: #475569;">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <p class="mb-0">&copy; 2025 Saúdex. Todos os direitos reservados.</p>
+      </div>
+      <div class="col-md-6 text-md-end">
+        <a href="#" class="text-light me-3">Política de Privacidade</a>
+        <a href="#" class="text-light">Termos de Uso</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Adicionando efeito de clique suave
+  document.querySelectorAll('.health-card').forEach(card => {
+      card.addEventListener('click', function() {
+          this.style.transform = 'scale(0.98)';
+          setTimeout(() => {
+              window.location.href = "#Informacoes";
+          }, 200);
+      });
+  });
+
+  // Efeito de scroll na navbar
+  window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+          navbar.style.padding = '0.5rem 0';
+          navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+          navbar.style.padding = '1rem 0';
+          navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+      }
+  });
+</body>
 </html>
