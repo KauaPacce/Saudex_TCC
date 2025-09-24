@@ -55,22 +55,27 @@
         </div>
 
         <div class="card">
-            <h3>Semana 5: Ajustes Visuais e Sistema de Login</h3>
-            <p><strong>Objetivo:</strong> </p>
-            <ul>
-                <li></li>
-    
-            </ul>
-        </div>
+    <h3>Semana 5: Integração de Funcionalidades e Testes</h3>
+    <p><strong>Objetivo:</strong> Integrar todas as funcionalidades desenvolvidas e realizar testes para garantir o bom funcionamento do sistema.</p>
+    <ul>
+        <li>Integração entre frontend e backend (formulários, login, CRUD).</li>
+        <li>Testes de usabilidade e navegação no site.</li>
+        <li>Correção de falhas de integração e ajustes no fluxo de navegação.</li>
+        <li>Testes em diferentes dispositivos (responsividade).</li>
+    </ul>
+</div>
 
-        <div class="card">
-            <h3>Semana 6: Correção de bugs Visuais e implementação de sistema Admin</h3>
-            <p><strong>Objetivo:</strong> </p>
-            <ul>
-                <li></li>
-    
-            </ul>
-        </div>
+<div class="card">
+    <h3>Semana 6: Correção de Bugs Visuais e Implementação do Sistema Admin</h3>
+    <p><strong>Objetivo:</strong> Finalizar ajustes visuais e implementar o painel administrativo para gerenciamento do conteúdo.</p>
+    <ul>
+        <li>Correção de inconsistências visuais no layout final.</li>
+        <li>Criação do painel administrativo com login restrito.</li>
+        <li>Permissões diferenciadas para administradores (editar, deletar, adicionar conteúdo).</li>
+        <li>Testes finais e preparação para apresentação do projeto.</li>
+    </ul>
+</div>
+
 
         <div class="card equipe">
             <h3>Equipe do Projeto</h3>
