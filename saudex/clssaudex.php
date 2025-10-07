@@ -72,6 +72,17 @@ class clssaudex
     public function Cadastrar() 
     {
         try {
+
+            // Verificar se o email já existe
+            $sql_check = "SELECT cod FROM usuarios WHERE Email = :Email";
+            $Comando_check = $this->conn->prepare($sql_check);
+            $Comando_check->bindParam(':Email', $this->Email);
+            $Comando_check->execute();
+
+            if ($Comando_check->rowCount() > 0) {
+                return json_encode(['status' => 'erro', 'msg' => 'Email já cadastrado.']);
+            }
+
             $sql = "insert into usuarios (Nome, Senha, Email, Telefone, cpf, cep, nasc, genero) values (:Nome, :Senha, :Email, :Telefone, :cpf, :cep, :nasc, :genero)";
             $Comando = $this->conn->prepare($sql);
             $Comando->bindParam(':Nome', $this->Nome);
@@ -85,7 +96,8 @@ class clssaudex
             $Comando->execute();
             
             if ($Comando->rowCount() > 0) {
-                return json_encode(['status' => 'sucesso', 'msg' => 'Inclusao com sucesso!']);
+            $cod = $this->conn->lastInsertId();
+                return json_encode(['status' => 'sucesso', 'msg' => 'Inclusao com sucesso!', 'cod' => $cod ]);
             } else {
                 return json_encode(['status' => 'erro', 'msg' => 'Erro ao tentar efetivar cadastro']);
             }
@@ -233,6 +245,59 @@ class clssaudex
             }
         } catch (PDOException $erro) {
             return json_encode(["status" => "erro", "msg" => $erro->getMessage()]);
+        }
+    }
+
+    // -- metodo Inserir Notificacao ----------------------------------
+    public function InserirNotificacao($codUsuario, $mensagem) 
+    {
+        try {
+            $sql = "INSERT INTO notificacoes (codUsuario, tipo, mensagem, lida) 
+                    VALUES (:codUsuario, 'sistema', :mensagem, 0)";
+            
+            // Usando $this->conn (conexão da classe)
+            $stmt = $this->conn->prepare($sql); 
+            
+            $stmt->bindParam(':codUsuario', $codUsuario);
+            $stmt->bindParam(':mensagem', $mensagem);
+            
+            return $stmt->execute();
+            
+        } catch (PDOException $e) {
+            error_log("Erro ao inserir notificação: " . $e->getMessage()); 
+            return false;
+        }
+    }
+
+    // -- metodo Notificar Novo Post ----------------------------------
+    public function NotificarNovoPost($codUsuarioDonoPost, $codPost)
+    {
+        try {
+            $sqlUsuarios = "SELECT cod FROM usuarios WHERE cod != :codDono";
+            $stmtUsuarios = $this->conn->prepare($sqlUsuarios);
+            $stmtUsuarios->bindParam(':codDono', $codUsuarioDonoPost);
+            $stmtUsuarios->execute();
+            $usuarios = $stmtUsuarios->fetchAll(PDO::FETCH_COLUMN);
+
+            $mensagem = "Um novo post foi publicado!"; 
+        
+            $sqlNotificacao = "INSERT INTO notificacoes (codUsuario, codPost, tipo, mensagem, lida) 
+            VALUES (:codUsuario, :codPost, 'novo_post', :mensagem, 0)";
+
+            $stmtNotificacao = $this->conn->prepare($sqlNotificacao);
+
+            foreach ($usuarios as $codUsuario) {
+                $stmtNotificacao->bindParam(':codUsuario', $codUsuario);
+                $stmtNotificacao->bindParam(':codPost', $codPost); 
+                $stmtNotificacao->bindParam(':mensagem', $mensagem);
+                $stmtNotificacao->execute();
+        }
+
+            return true;
+
+        } catch (PDOException $e) {
+            error_log("Erro ao notificar novo post: " . $e->getMessage()); 
+            return false;
         }
     }
 }

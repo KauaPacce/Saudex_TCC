@@ -3,8 +3,17 @@ session_start();
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     die('Acesso negado');
 }
+
+if (!isset($_SESSION['usuario']['cod'])) { 
+    die('Usuário não autenticado. Código de usuário não encontrado na sessão.');
+}
+$codUsuario = $_SESSION['usuario']['cod'];
+
 require_once 'conexao.php';
 $conexao = (new Conexao())->getConnection();
+
+require_once 'clssaudex.php'; 
+$saudex = new clssaudex();
 
 // Criar postagem
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['acao'] === 'criar') {
@@ -12,16 +21,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['acao'] === 'criar') {
     $conteudo = $_POST['conteudo'];
     $imagem = '';
 
+    // Validar e processar upload de imagem
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+
+        $mimeType = mime_content_type($_FILES['imagem']['tmp_name']);
+        $allowedMimes = ['image/jpeg', 'image/png', 'image/gif'];
+
+    // Validar tipo de arquivo
+    if (!in_array($mimeType, $allowedMimes)) {
+        header('Location: postagem.php?error=Tipo de arquivo não permitido.');
+        exit;
+    }
         $ext = pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION);
         $nomeArquivo = uniqid() . '.' . $ext;
         move_uploaded_file($_FILES['imagem']['tmp_name'], 'imagens/' . $nomeArquivo);
         $imagem = 'imagens/' . $nomeArquivo;
     }
-
     $legenda = $titulo . '||' . $conteudo;
     $stmt = $conexao->prepare("INSERT INTO posts (codUsuario, legenda, urlMidia, tipoMidia) VALUES (?, ?, ?, 'imagem')");
-    $stmt->execute([$_SESSION['role'], $legenda, $imagem]);
+    $stmt->execute([$codUsuario, $legenda, $imagem]);
+
+      // Pega o ID do novo post
+    $codNovoPost = $conexao->lastInsertId();
+
+    //  Chama o método de notificação
+    if ($codNovoPost) {
+        $saudex->NotificarNovoPost($codUsuario, $codNovoPost); 
+    }
     header('Location: postagem.php');
     exit;
 }

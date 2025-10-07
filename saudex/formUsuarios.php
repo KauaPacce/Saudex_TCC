@@ -116,7 +116,7 @@ $(document).ready(function() {
                 data: formData,
                 success: function(response) {
                     if (response.includes("sucesso")) {
-                        alert('Cadastro realizado com sucesso! Redirecionando para login...');
+                        alert('Cadastro realizado com sucesso!\nRedirecionando para login...');
                         setTimeout(function() {
                             window.location.href = 'formLogin.php';
                         }, 2000);

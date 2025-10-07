@@ -8,6 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/notificacoes.css">
 </head>
 <body>
 
@@ -15,7 +16,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
   <div class="container">
     <a class="navbar-brand" href="#">
-      <img src="img/logo_saudex.png" alt="Saúdex Logo">
+      <img src="img/logoVerde.png" alt="Saúdex Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -25,6 +26,16 @@
         <a href="#Informacoes" class="nav-btn btn-outline-primary me-2">Medicina</a>
         <a href="Ultimas-noticias.php" class="nav-btn btn-outline-primary me-2">Notícias</a>
         <?php if(isset($_SESSION['usuario']) && !empty($_SESSION['usuario'])): ?>
+        <!-- Ícone de Notificações -->
+    <div class="dropdown me-3">
+      <button class="btn btn-outline-primary position-relative" type="button" id="notificacoesDropdown" data-bs-toggle="dropdown">
+        <i class="fa fa-bell"></i>
+        <span id="contadorNotificacoes" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end p-2" style="width: 300px;" aria-labelledby="notificacoesDropdown" id="listaNotificacoes">
+        <li class="text-center text-muted small">Carregando...</li>
+      </ul>
+    </div>
         <!-- USUÁRIO LOGADO -->
         <div class="dropdown">
     <button class="btn btn-outline-success dropdown-toggle me-2" type="button" data-bs-toggle="dropdown">
@@ -174,7 +185,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-4 mb-4">
-        <div class="mb-3"><img src="img/logo_saudex.png" alt="Saúdex Logo" height="40" class="me-2"></div>
+        <div class="mb-3"><img src="img/logoVerde.png" alt="Saúdex Logo" height="40" class="me-2"></div>
         <p class="text-light">Sua plataforma de confiança para informações de saúde baseadas em evidências científicas.</p>
       </div>
       <div class="col-lg-2 col-md-6 mb-4">
@@ -218,6 +229,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+<script src="js/notificacoes.js"></script>
+
 <script>
   // Adicionando efeito de clique suave
   document.querySelectorAll('.health-card').forEach(card => {
@@ -240,3 +253,4 @@
           navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
       }
   });
+</script>

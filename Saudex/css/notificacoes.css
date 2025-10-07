@@ -1,0 +1,66 @@
+/* ======= Ícone do Sino ======= */
+.menu-notificacao .btn {
+  border: none;
+  background: none;
+  position: relative;
+  color: #198754; /* tom verde do seu site */
+  font-size: 1.25rem;
+}
+
+.menu-notificacao .btn:hover {
+  color: #145c36;
+  transform: scale(1.05);
+  transition: all 0.2s ease-in-out;
+}
+
+/* ======= Badge Vermelho ======= */
+#contadorNotificacoes {
+  font-size: 0.7rem;
+  padding: 4px 6px;
+  line-height: 1;
+  border-radius: 50%;
+  background-color: #dc3545; /* vermelho bootstrap */
+  color: white;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* ======= Dropdown das Notificações ======= */
+#listaNotificacoes {
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+/* Estilo dos itens */
+#listaNotificacoes li {
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+#listaNotificacoes li:hover {
+  background-color: #f8f9fa;
+}
+
+/* Quando não há notificações */
+#listaNotificacoes .text-muted {
+  color: #6c757d !important;
+}
+
+/* ======= Animação opcional do sino ======= */
+@keyframes bell-shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-15deg); }
+  75% { transform: rotate(10deg); }
+  100% { transform: rotate(0); }
+}
+
+.bell-animar {
+  animation: bell-shake 0.6s ease-in-out;
+}

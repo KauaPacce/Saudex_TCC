@@ -6,7 +6,7 @@ function Cadastrar()
 
     // 2 parte: congelar a tela e executar php
     $.ajax({
-        method: 'GET',
+        method: 'POST',
         url: 'contrUsuarios.php?acao=Cadastrar',
         data: DadosForm,
         
@@ -37,7 +37,7 @@ function Excluir()
     var DadosForm = $('#cadastro').serialize();
 
     $.ajax({
-        method: 'GET',
+        method: 'POST',
         url: 'contrUsuarios.php?acao=Excluir',
         data: DadosForm
     })
@@ -60,7 +60,7 @@ function Editar()
     var DadosForm = $('#cadastro').serialize();
 
     $.ajax({
-        method: 'GET',
+        method: 'POST',
         url: 'contrUsuarios.php?acao=Editar',
         data: DadosForm
     })
@@ -84,7 +84,7 @@ function Pesquisar()
 
     // 2 parte: congelar a tela e executar php
     $.ajax({
-        method: 'GET',
+        method: 'POST',
         url: 'contrUsuarios.php?acao=Pesquisar',
         data: DadosForm,
         

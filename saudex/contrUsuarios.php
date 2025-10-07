@@ -38,7 +38,21 @@ $Acao = $_POST['acao'];
 switch ($Acao) 
 {
     case 'Cadastrar':
-        echo $usuarios->Cadastrar();
+        $resultadoJson = $usuarios->Cadastrar();
+        
+        $resultado = json_decode($resultadoJson, true);
+        
+        // Verifica se a resposta é válida e contém o código do novo usuário
+        if (isset($resultado['status']) && $resultado['status'] === 'sucesso' && isset($resultado['cod'])) {
+            $codNovoUsuario = $resultado['cod'];
+            
+            $NomeUsuario = $usuarios->getNome(); 
+            
+            // insere uma notificação de boas-vindas
+            $mensagem = "Bem-vindo ao Saúdex, " . htmlspecialchars($NomeUsuario) . "!";
+            $usuarios->InserirNotificacao($codNovoUsuario, $mensagem);
+        }
+        echo $resultadoJson; 
         break;
     case 'Excluir':
         echo $usuarios->Excluir();

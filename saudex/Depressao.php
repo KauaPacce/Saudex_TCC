@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="img/logo_saudex.png" alt="Saúdex Logo" height="141" class="me-2">
+                    <img src="img/logoRoxo.png" alt="Saúdex Logo" height="141" class="me-2">
                 </a>
                 <div class="d-flex">
                     <a href="Menu.php" class="nav-btn btn-outline-primary">Início</a>
@@ -230,7 +230,7 @@
             <div class="row">
                 <div class="col-lg-4 mb-4">
                     <div class="mb-3">
-                        <img src="img/logo_saudex.png" alt="Saúdex Logo" height="40" class="me-2">
+                        <img src="img/logoRoxo.png" alt="Saúdex Logo" height="40" class="me-2">
                     </div>
                     <p class="text-light">Sua plataforma de confiança para informações de saúde baseadas em evidências científicas.</p>
                 </div>

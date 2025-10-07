@@ -11,7 +11,8 @@ CREATE TABLE usuarios(
     cep CHAR (9),
     nasc DATE NOT NULL,
     genero ENUM ('Masculino','Feminino','Outro'),
-    role ENUM('admin', 'user') DEFAULT 'user'
+    role ENUM('admin', 'user') DEFAULT 'user',
+    Foto VARCHAR(255) DEFAULT NULL
 );
 
 CREATE TABLE posts (
@@ -28,11 +29,13 @@ CREATE TABLE posts (
 CREATE TABLE notificacoes (
     codNotificacao INT AUTO_INCREMENT PRIMARY KEY,
     codUsuario INT NOT NULL,
-    tipo ENUM('comentario','mensagem','sistema','consulta') NOT NULL,
+    codPost INT NULL,
+    tipo ENUM('comentario','mensagem','sistema','consulta','novo_post') NOT NULL,
     mensagem TEXT NOT NULL,
     lida BOOLEAN DEFAULT 0,
     criadoEm DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (codUsuario) REFERENCES usuarios(cod)
+    FOREIGN KEY (codUsuario) REFERENCES usuarios(cod),
+    FOREIGN KEY (codPost) REFERENCES posts(codPost)
 );
 
 INSERT INTO usuarios (Nome, Senha, Email, cpf, Telefone, cep, nasc, genero, role) 
