@@ -52,11 +52,11 @@ function Cadastrar() {
 function Excluir() {
     let cod = $('#cod').val();
     if (!cod) {
-        alert("Por favor, digite o código do usuário para exclusão.");
+        alert("Por favor, digite o codigo do usuário para exclusão.");
         return;
     }
 
-    if (confirm('Tem certeza que deseja excluir o usuário de código ' + cod + '?')) {
+    if (confirm('Tem certeza que deseja excluir o usuário de codigo ' + cod + '?')) {
         enviarRequisicao('Excluir', { cod: cod }, function(resultado) {
             alert(resultado.msg);
             carregarUsuarios();
@@ -82,7 +82,7 @@ function Editar() {
     }, {});
     
     if (!dados.cod) {
-        alert("Por favor, digite o código do usuário para edição.");
+        alert("Por favor, digite o codigo do usuário para edição.");
         return;
     }
 
@@ -99,20 +99,20 @@ function Pesquisar() {
     let nome = $('#Nome').val();
 
     if (!cod && !nome) {
-        alert("Por favor, digite um código ou um nome para a pesquisa.");
+        alert("Por favor, digite um codigo ou um nome para a pesquisa.");
         return;
     }
 
     enviarRequisicao('Pesquisar', { cod: cod, Nome: nome }, function(resultado) {
-        let tabelaHtml = '<table border="1"><thead><tr><th>Cód</th><th>Nome</th><th>Email</th><th>Telefone</th><th>CPF</th><th>CEP</th><th>Nascimento</th><th>Gênero</th><th>Role</th><th>Ações</th></tr></thead><tbody>';
+        let tabelaHtml = '<table border="1"><thead><tr><th>Cod</th><th>Nome</th><th>Email</th><th>Telefone</th><th>CPF</th><th>CEP</th><th>Nascimento</th><th>Gênero</th><th>Role</th><th>Ações</th></tr></thead><tbody>';
         resultado.data.forEach(usuario => {
             let acoes = '';
             if (usuario.role === 'admin') {
-                acoes += `<button onclick="rebaixarUser(${usuario.cod})">Rebaixar</button>`;
+                acoes += `<a href="#" class="btn-rebaixar" onclick="rebaixarUser(${usuario.cod}); return false;">Rebaixar</a>`;
             } else {
-                acoes += `<button onclick="promoverAdmin(${usuario.cod})">Promover</button>`;
+                acoes += `<a href="#" class="btn-promover" onclick="promoverAdmin(${usuario.cod}); return false;">Promover</a>`;
             }
-            acoes += ` <button onclick="excluirUsuario(${usuario.cod})">Excluir</button>`;
+            acoes += `<a href="#" class="btn-excluir" onclick="excluirUsuario(${usuario.cod}); return false;">Excluir</a>`;
             
             tabelaHtml += `<tr>
                 <td>${usuario.cod}</td>
@@ -160,7 +160,7 @@ function carregarUsuarios() {
         success: function(response) {
             try {
                 let usuarios = JSON.parse(response);
-                let tabelaHtml = '<h3>Lista de Usuários</h3><table border="1"><thead><tr><th>Cód</th><th>Nome</th><th>Email</th><th>Role</th><th>Ações</th></tr></thead><tbody id="lista-usuarios">';
+                let tabelaHtml = '<h3>Lista de Usuários</h3><table border="1"><thead><tr><th>Cod</th><th>Nome</th><th>Email</th><th>Role</th><th>Ações</th></tr></thead><tbody id="lista-usuarios">';
                 usuarios.data.forEach(usuario => {
                     let acoes = '';
                     if (usuario.role === 'admin') {

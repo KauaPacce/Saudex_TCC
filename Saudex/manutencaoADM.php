@@ -12,7 +12,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Gerenciamento de Usuários</title>
-    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="css/Adm.css">
 </head>
 
 <body>
