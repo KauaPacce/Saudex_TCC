@@ -14,7 +14,7 @@
         <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="img/logoRoxo.png" alt="Saúdex Logo" height="141" class="me-2">
+                    <img src="img/logoRoxo.png" alt="Saúdex Logo" class="me-2 navbar-logo">
                 </a>
                 <div class="d-flex">
                     <a href="Menu.php" class="nav-btn btn-outline-primary">Início</a>
@@ -32,8 +32,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8">
                         <span class="hero-badge"><i class="fas fa-brain me-2"></i>Saúde Mental</span>
-                         <h1 class="display-5 fw-bold mb-3">Compreendendo a Depressão</h1>
-                         <p class="lead mb-4">A depressão é uma condição médica tratável que afeta milhões de pessoas. Entender seus sinais, sintomas e opções de tratamento é o primeiro passo para a recuperação.</p>
+                        <h1 class="display-5 fw-bold mb-3">Compreendendo a Depressão</h1>
+                        <p class="lead mb-4">A depressão é uma condição médica tratável que afeta milhões de pessoas. Entender seus sinais, sintomas e opções de tratamento é o primeiro passo para a recuperação.</p>
                         <div class="d-flex flex-wrap gap-3">
                             <a href="#sintomas" class="btn btn-light btn-lg">Ver Sintomas</a>
                             <a href="#tratamento" class="btn btn-outline-light btn-lg">Opções de Tratamento</a>
@@ -247,7 +247,7 @@
                     <h5 class="mb-3">Condições</h5>
                     <div class="footer-links d-flex flex-column">
                         <a href="#" class="mb-2">Depressão</a>
-                        <a href="#" class="mb-2">Ansiedade</a>
+                        <a href="Ansiedade.php" class="mb-2">Ansiedade</a>
                         <a href="#" class="mb-2">Obesidade</a>
                         <a href="#" class="mb-2">Diabetes</a>
                     </div>

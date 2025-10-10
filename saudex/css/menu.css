@@ -10,13 +10,17 @@
     }
 
     .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: white;
-}
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: white;
+    }
+
+    .navbar-logo {
+      height: 120px; 
+    }
 
     .container {
       position: relative;

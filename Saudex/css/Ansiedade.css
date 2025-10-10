@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== CORES PRINCIPAIS ===== */
+:root {
+  --cor1: #facc15;  
+  --cor2: #f97316;  
+  --cor3: #f59e0b;  
+  --cor4: #78350f;  
+  --bg-light: #fffdf6;
+  --texto: #334155;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--texto);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  flex-wrap: wrap; 
+  background-color: #fff !important;
+  padding: 0 20px;
+}
+
+.navbar-logo {
+  height: 120px;
+}
+
+.nav-btn {
+  margin-left: 10px;
+  border-radius: 30px;
+  padding: 8px 16px; 
+  font-weight: 500;
+  border: 2px solid var(--cor2);
+  color: var(--cor2);
+  text-decoration: none;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  flex-shrink: 0; 
+}
+
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--cor2), var(--cor3));
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+  border-radius: 50px;
+}
+
+.nav-btn:hover::after {
+  width: 100%;
+}
+
+.nav-btn:hover {
+  background-color: var(--cor2);
+  color: #fff;
+  transform: translateX(4px) scale(1.05);
+}
+
+/* ===== HERO SECTION ===== */
+.hero-ansiedade {
+  background: linear-gradient(135deg, var(--cor1) 0%, var(--cor2) 100%);
+  color: white;
+  padding: 5rem 0;
+  border-radius: 0 0 30px 30px;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-ansiedade::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,181,36,0.25)"/></svg>');
+  background-size: cover;
+  z-index: 0;
+  
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-ansiedade h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+}
+
+
+.hero-ansiedade .btn {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.hero-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+/* ===== INFO SECTION ===== */
+.info-section {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-weight: 700;
+  color: var(--cor4);
+  margin-bottom: 30px;
+}
+
+.text-gradient {
+  background: var(--cor2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.info-card {
+  background: #fff;
+  border-top: 4px solid var(--cor2);
+  border-radius: 18px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.info-card h4 {
+  color: var(--cor4);
+  font-weight: 600;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.info-card p {
+  color: var(--texto);
+  font-size: 15px;
+}
+
+.card-icon {
+  font-size: 35px;
+  color: var(--cor2);
+  margin-bottom: 10px;
+}
+
+
+/* ===== SINTOMAS ===== */
+.symptom-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.symptom-list li {
+  margin-bottom: 10px;
+  padding-left: 25px;
+  position: relative;
+  font-size: 15px;
+}
+
+.symptom-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--cor4);
+  font-weight: bold;
+}
+
+/* ===== TRATAMENTO ===== */
+.treatment-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.treatment-list li {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+/* ===== EMERGÊNCIA ===== */
+.emergency-card {
+  background-color: #fff9eb;
+  border-left: 6px solid var(--cor2);
+  color: #5b4d2e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.emergency-card strong {
+  color: var(--cor4);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: #111827;
+  color: #e5e7eb;
+  padding: 60px 0 20px 0;
+  font-size: 15px;
+}
+
+footer h5 {
+  color: #facc15;
+  font-weight: 600;
+}
+
+.footer-links a {
+  color: #d1d5db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--cor1);
+}
+
+footer hr {
+  border-color: #374151;
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeInUp 0.8s ease-out; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 992px) {
+  .hero-ansiedade {
+    text-align: center;
+    padding: 80px 0;
+  }
+
+  .hero-ansiedade .btn {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: center;
+    flex-wrap: wrap; 
+  }
+
+  .nav-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    margin: 0.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-ansiedade h1 { font-size: 2rem; }
+  .info-section { padding: 60px 15px; }
+}

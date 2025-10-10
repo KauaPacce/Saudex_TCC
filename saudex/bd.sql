@@ -11,8 +11,9 @@ CREATE TABLE usuarios(
     cep CHAR (9),
     nasc DATE NOT NULL,
     genero ENUM ('Masculino','Feminino','Outro'),
-    role ENUM('admin', 'user') DEFAULT 'user',
-    Foto VARCHAR(255) DEFAULT NULL
+    Foto VARCHAR(255) DEFAULT NULL,
+    role ENUM('admin', 'user') DEFAULT 'user'
+    
 );
 
 CREATE TABLE posts (
