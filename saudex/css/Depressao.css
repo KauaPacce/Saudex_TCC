@@ -319,6 +319,12 @@ footer {
   margin-top: auto;
 }
 
+footer .col-lg-2 h5,
+footer .col-lg-3 h5 {
+  color: rgb(96, 9, 117); 
+  font-weight: 600;
+}
+
 .footer-links a {
   color: #cbd5e1;
   text-decoration: none;

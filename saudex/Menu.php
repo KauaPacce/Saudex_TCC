@@ -200,8 +200,8 @@
       <div class="col-lg-3 col-md-6 mb-4">
         <h5 class="mb-3">Condições</h5>
         <div class="footer-links d-flex flex-column">
-          <a href="#" class="mb-2">Depressão</a>
-          <a href="#" class="mb-2">Ansiedade</a>
+          <a href="Depressao.php" class="mb-2">Depressão</a>
+          <a href="Ansiedade.php" class="mb-2">Ansiedade</a>
           <a href="#" class="mb-2">Obesidade</a>
           <a href="#" class="mb-2">Diabetes</a>
         </div>

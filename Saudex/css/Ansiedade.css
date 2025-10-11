@@ -232,9 +232,9 @@ main {
 /* ===== FOOTER ===== */
 footer {
   background-color: #111827;
-  color: #e5e7eb;
-  padding: 60px 0 20px 0;
-  font-size: 15px;
+  color: white;
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;
 }
 
 footer h5 {
@@ -246,6 +246,7 @@ footer h5 {
   color: #d1d5db;
   text-decoration: none;
   transition: color 0.3s;
+  margin-top: auto;
 }
 
 .footer-links a:hover {

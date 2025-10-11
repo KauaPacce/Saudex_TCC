@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+body {
+    background-color: #f4f7f9; 
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.custom-container {
+    background-color: #ffffff;
+    padding: 2.5rem 3rem;
+    border-radius: 16px; 
+    box-shadow: 0px 10px 30px rgba(0, 70, 150, 0.08); 
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+}
+
+/* --- CABEÇALHO DA SEÇÃO --- */
+.section-header {
+    margin-bottom: 2.5rem;
+}
+
+.section-subtitle {
+    color: #007bff; 
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a253c; 
+    margin: 0.5rem 0;
+}
+
+.section-description {
+    font-size: 1rem;
+    color: #6c757d; 
+    max-width: 600px;
+    margin: 0 auto; 
+}
+
+/* --- GRID DE CARDS DE SERVIÇOS --- */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1.5rem; 
+    text-align: left;
+}
+
+.service-card {
+    background-color: #f8f9fa; 
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+.service-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0px 12px 25px rgba(0, 70, 150, 0.12); 
+}
+
+.service-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1a253c;
+    margin-bottom: 0.75rem;
+}
+
+.service-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.6;
+}
+
+/* --- BOTÕES DE AÇÃO --- */
+.form-submit {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* Botão Primário (Gerenciar Postagens) */
+a[href="postagem.php"].form-submit {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+a[href="postagem.php"].form-submit:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+}
+
+/* Botão Secundário (Controle de Usuários) */
+a[href="manutencaoADM.php"].form-submit {
+    background-color: #ffffff;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+a[href="manutencaoADM.php"].form-submit:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+
+
+.divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+    margin: 0 auto 2.5rem;
+}
+
+
+/* --- Responsividade com outras telas --- */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr; 
+    }
+
+    .custom-container {
+        padding: 2rem 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+}

@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const item = document.createElement("li");
             item.className = "dropdown-item small " + (n.lida ? "text-muted" : "fw-bold");
             item.textContent = n.mensagem;
+            item.setAttribute("data-id", n.codNotificacao);
             lista.appendChild(item);
           });
         }
@@ -60,4 +61,26 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch(err => console.error("Erro ao marcar como lidas:", err));
   });
+
+  // Marcar notificação como lida ao clicar na notificação específica
+  lista.addEventListener("click", function(event) {
+    const item = event.target.closest('li');
+      if (item && !item.classList.contains('text-muted')) {
+      const idNotificacao = item.getAttribute('data-id'); // Obter o ID da notificação
+
+    fetch(`notificacoes.php?acao=marcarLidas&id=${idNotificacao}`)
+      .then(res => {
+        if (!res.ok) throw new Error(`Erro HTTP: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        if (data.status === 'ok') {
+          item.classList.add('text-muted');  // Marca a notificação como lida (muda a cor)
+          contador.textContent = ""; // Resetar o contador
+          carregarNotificacoes(); // Recarregar as notificações
+        }
+      })
+      .catch(err => console.error("Erro ao marcar como lidas:", err));
+  }
+});
 });

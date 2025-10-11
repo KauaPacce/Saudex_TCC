@@ -18,11 +18,11 @@ if (!isset($_SESSION['usuario']['cod'])) {
 
 $codUsuario = $_SESSION['usuario']['cod'];
 
-// Se o parâmetro "acao" for "marcarLidas", atualiza as notificações
-if (isset($_GET['acao']) && $_GET['acao'] === 'marcarLidas') {
-    $sql = "UPDATE notificacoes SET lida = 1 WHERE codUsuario = ?";
+// Se o parâmetro "acao" for "marcarLidas" e "id" for enviado
+if (isset($_GET['acao']) && $_GET['acao'] === 'marcarLidas' && isset($_GET['id'])) {
+    $sql = "UPDATE notificacoes SET lida = 1 WHERE codNotificacao = ? AND codUsuario = ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$codUsuario]);
+    $stmt->execute([$_GET['id'], $codUsuario]);
     echo json_encode(['status' => 'ok']);
     exit;
 }

@@ -1,0 +1,330 @@
+:root {
+    --primary: #3b82f6; /* Azul Sólido */
+    --primary-light: #60a5fa;
+    --primary-dark: #2563eb;
+    --text-color: #1f2937; /* Quase preto */
+    --text-light: #6b7280; /* Cinza suave */
+    --background-color: #f3f4f6; /* Fundo principal: Cinza muito claro */
+    --container-bg: #ffffff; /* Fundo do container: Branco */
+    --card-bg: #ffffff; /* Fundo dos cartões: Branco */
+    --shadow-subtle: 0 2px 4px rgba(0, 0, 0, 0.04); 
+    --shadow-elevation: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra mais elevada */
+    --border-radius: 10px; 
+    --border-color: #e5e7eb;
+}
+
+/* Estilos Globais */
+body {
+    font-family: 'Roboto', 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 30px;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Layout Principal */
+.custom-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: var(--container-bg);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-elevation); 
+}
+
+h2 {
+    color: var(--primary-dark);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h3 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary);
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* Formulário de Postagem */
+.post-form {
+    background: var(--background-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-subtle);
+    border: 1px solid var(--border-color);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"],
+textarea,
+input[type="file"] {
+    display: block;
+    padding: 1rem; 
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: var(--card-bg); 
+    color: var(--text-color);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    outline: none;
+    background-color: #fff;
+}
+
+.post-form textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* Botão de Publicar */
+.form-submit {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 1rem 2.5rem; 
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.form-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Lista de Postagens */
+.post-list {
+    margin-top: 2rem;
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem;
+}
+
+/* Item Individual da Postagem */
+.post-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-subtle);
+    padding: 1rem;
+    display: grid; 
+    grid-template-columns: 100px 1fr auto; 
+    align-items: center;
+    gap: 1.5rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.2s;
+}
+
+.post-item:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.post-img {
+    width: 100px; 
+    height: 65px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+    border: 1px solid var(--border-color);
+}
+
+/* Área de Detalhes do Post */
+.post-item > div:nth-child(2) {
+    grid-column: 2 / 3;
+}
+
+.post-item a {
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.post-item div[style*="font-size:0.95rem"] {
+    color: var(--text-light);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Formulário de Edição */
+.post-item form {
+    grid-column: 3 / 4;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    flex-shrink: 0; 
+}
+
+.post-item form input[type="text"],
+.post-item form input[name="conteudo"] {
+    padding: 0.5rem 0.75rem;
+    width: 140px; 
+    margin: 0;
+    font-size: 0.85rem;
+    height: auto;
+    background-color: var(--background-color);
+}
+
+.post-item form input[name="conteudo"] {
+    width: 180px; 
+}
+
+.post-item form input[type="file"] {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+    margin: 0;
+    border: none;
+    width: 150px;
+    background-color: transparent;
+}
+
+/* Botão de Edição */
+.edit-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.edit-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* Tablet (abaixo de 1250px) */
+@media (max-width: 1250px) {
+    
+    .post-item {
+        grid-template-columns: 100px 1fr; 
+        gap: 1rem;
+    }
+    .post-item form {
+        grid-column: 1 / 3; 
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        border-top: 1px dashed var(--border-color);
+        padding-top: 1rem;
+        margin-top: 1rem;
+    }
+    
+    .post-item form input[type="text"],
+    .post-item form input[name="conteudo"] {
+        width: calc(50% - 0.5rem); 
+        margin-bottom: 0.5rem;
+    }
+    
+    .post-item form input[type="file"],
+    .edit-btn {
+        width: 100%;
+    }
+}
+
+/* Celular (abaixo de 768px) */
+@media (max-width: 768px) {
+    body {
+        padding: 15px; 
+    }
+
+    .custom-container {
+        padding: 15px;
+        box-shadow: none; 
+        border: none;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .post-form {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .post-item {
+        grid-template-columns: 1fr; 
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .post-img {
+        width: 100%;
+        height: auto;
+        max-height: 150px;
+        margin-bottom: 0.5rem;
+    }
+    
+    .post-item a {
+        font-size: 1.1rem;
+    }
+
+    .post-item form {
+        width: 100%;
+        flex-direction: column; 
+        gap: 0.5rem;
+        padding-top: 0.75rem;
+        margin-top: 0.75rem;
+    }
+
+    .post-item form input[type="text"],
+    .post-item form input[name="conteudo"],
+    .post-item form input[type="file"],
+    .edit-btn {
+        width: 100%;
+        box-sizing: border-box; 
+    }
+    
+    .edit-btn {
+        margin-top: 0.5rem;
+    }
+}

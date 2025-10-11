@@ -11,8 +11,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Administrador</title>
-    <link rel="stylesheet" href="css/painel.css">
-    <link rel="stylesheet" href="css/formAdmin.css"> 
+    <link rel="stylesheet" href="css/menuAdm.css"> 
 </head>
 <body>
     <div class="custom-container">

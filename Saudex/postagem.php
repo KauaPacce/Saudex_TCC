@@ -81,16 +81,7 @@ $posts = $conexao->query("SELECT * FROM posts ORDER BY criadoEm DESC")->fetchAll
 <head>
     <meta charset="utf-8" />
     <title>Painel de Postagens</title>
-    <link rel="stylesheet" href="css/painel.css">
-    <link rel="stylesheet" href="css/formAdmin.css">
-    <style>
-        .post-form { background: #f9fafb; padding:2rem; border-radius:12px; margin-bottom:2rem; }
-        .post-list { margin-top:2rem; }
-        .post-item { background:#fff; border-radius:8px; box-shadow:var(--shadow); margin-bottom:1.5rem; padding:1rem; display:flex; align-items:center; gap:1rem;}
-        .post-img { width:120px; height:80px; object-fit:cover; border-radius:8px; }
-        .edit-btn { background:var(--primary); color:#fff; border:none; padding:0.5rem 1rem; border-radius:6px; cursor:pointer;}
-        .edit-btn:hover { background:var(--primary-dark);}
-    </style>
+    <link rel="stylesheet" href="css/postagem.css">
 </head>
 <body>
 <div class="custom-container">

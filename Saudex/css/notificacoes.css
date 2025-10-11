@@ -15,8 +15,8 @@
 
 /* ======= Badge Vermelho ======= */
 #contadorNotificacoes {
-  font-size: 0.7rem;
-  padding: 4px 6px;
+  font-size: 0.75rem;
+  padding: 5px 8px;
   line-height: 1;
   border-radius: 50%;
   background-color: #dc3545; /* vermelho bootstrap */
@@ -24,7 +24,7 @@
   position: absolute;
   top: -5px;
   right: -5px;
-  min-width: 18px;
+  min-width: 20px;
   text-align: center;
   display: inline-block;
 }
@@ -33,18 +33,30 @@
 #listaNotificacoes {
   max-height: 300px;
   overflow-y: auto;
+  overflow-x: hidden;
+  max-width: 350px;
+  width: 100%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Estilo dos itens */
 #listaNotificacoes li {
   padding: 8px 10px;
-  border-radius: 6px;
+  border-radius: 7px;
+  white-space: normal;
+  word-wrap: break-word; 
+  overflow-wrap: break-word;
+  margin-bottom: 8px; 
+  transition: background-color 0.3s;
 }
 
 #listaNotificacoes li:hover {
   background-color: #f8f9fa;
+  cursor: pointer;
 }
 
 /* Quando não há notificações */
@@ -63,4 +75,10 @@
 
 .bell-animar {
   animation: bell-shake 0.6s ease-in-out;
+}
+
+@media (max-width: 600px) {
+  #listaNotificacoes {
+    max-width: 100%;
+  }
 }
