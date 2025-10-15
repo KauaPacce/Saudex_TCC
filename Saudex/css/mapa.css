@@ -1,0 +1,146 @@
+body {
+      font-family: "Poppins", sans-serif;
+      background: #f5f8ff;
+      color: #002b5b;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: #007bff;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      max-width: 1300px;
+      margin: 1rem auto;
+      width: 95%;
+      gap: 15px;
+    }
+
+    #controls {
+      flex: 0 0 300px;
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: fit-content;
+    }
+
+    #mapa {
+      flex: 1;
+      border-radius: 12px;
+      position: relative;
+      min-height: 500px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #007bff;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .filtros {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    #locaisLista {
+      max-height: 200px;
+      overflow-y: auto;
+      padding-top: 8px;
+      font-size: 14px;
+    }
+
+    #locaisLista div {
+      cursor: pointer;
+      padding: 4px 2px;
+      border-radius: 4px;
+    }
+
+    #locaisLista div:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      color: #555;
+      margin: 0.5rem 0;
+    }
+
+    #spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #007bff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: girar 1s linear infinite;
+    }
+
+    @keyframes girar {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .info-legend {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #007bff;
+      line-height: 24px;
+      font-size: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      color: #002b5b;
+    }
+
+    .info-legend img {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    .leaflet-marker-icon {
+      cursor: pointer !important;
+    }

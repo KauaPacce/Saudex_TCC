@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Se o usuário não estiver logado, volta pro login
+// Se não estiver logado, redireciona
 if (!isset($_SESSION['usuario'])) {
     header("Location: formLogin.php");
     exit;
@@ -9,174 +9,141 @@ if (!isset($_SESSION['usuario'])) {
 
 // Conexão com banco
 $pdo = new PDO("mysql:host=localhost;dbname=saudex;charset=utf8", "root", "");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Carrega usuário atualizado do banco
+// Busca usuário atualizado
 $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE cod = ?");
 $stmt->execute([$_SESSION['usuario']['cod']]);
 $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Upload da foto
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['foto'])) {
-    $arquivo = $_FILES['foto'];
+// Mensagens
+$erros = [];
+$mensagemSucesso = "";
 
-    if ($arquivo['error'] === UPLOAD_ERR_OK) {
-        $ext = pathinfo($arquivo['name'], PATHINFO_EXTENSION);
-        $nomeFoto = "foto_" . $usuario['cod'] . "." . $ext;
-        $caminho = __DIR__ . "/uploads/" . $nomeFoto;
+// Atualização de perfil
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['salvar'])) {
+    $novoNome = trim($_POST['nome'] ?? '');
+    $novoEmail = trim($_POST['email'] ?? '');
+    $novoTelefone = trim($_POST['telefone'] ?? '');
+    $novoCpf = trim($_POST['cpf'] ?? '');
+    $novaNasc = trim($_POST['nasc'] ?? '');
+    $novoGenero = trim($_POST['genero'] ?? '');
 
-        if (!is_dir(__DIR__ . "/uploads")) {
-            mkdir(__DIR__ . "/uploads");
+    // Validações
+    if (empty($novoNome)) $erros[] = "Nome é obrigatório.";
+    if (empty($novoEmail) || !filter_var($novoEmail, FILTER_VALIDATE_EMAIL)) $erros[] = "Email inválido.";
+    if (empty($novoTelefone)) $erros[] = "Telefone é obrigatório.";
+    if (empty($novoCpf) || !preg_match('/^\d{3}\.\d{3}\.\d{3}-\d{2}$/', $novoCpf)) $erros[] = "CPF inválido (use XXX.XXX.XXX-XX).";
+    if (empty($novaNasc)) $erros[] = "Data de nascimento é obrigatória.";
+    if (empty($novoGenero)) $erros[] = "Selecione um gênero.";
+
+    if (empty($erros)) {
+        // Upload da foto
+        $caminhoFoto = $usuario['Foto'];
+        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+            $ext = strtolower(pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION));
+            $permitidos = ['jpg', 'jpeg', 'png'];
+            if (in_array($ext, $permitidos)) {
+                $dir = "uploads/";
+                if (!is_dir($dir)) mkdir($dir, 0755, true);
+                $novoNomeFoto = "foto_" . $usuario['cod'] . "." . $ext;
+                $caminhoFoto = $dir . $novoNomeFoto;
+                move_uploaded_file($_FILES['foto']['tmp_name'], $caminhoFoto);
+            } else {
+                $erros[] = "Apenas imagens JPG e PNG são aceitas.";
+            }
         }
 
-        move_uploaded_file($arquivo['tmp_name'], $caminho);
+        if (empty($erros)) {
+            // Atualiza no banco
+            $stmt = $pdo->prepare("
+                UPDATE usuarios 
+                SET Nome = ?, Email = ?, Telefone = ?, cpf = ?, nasc = ?, genero = ?, Foto = ?
+                WHERE cod = ?
+            ");
+            $stmt->execute([$novoNome, $novoEmail, $novoTelefone, $novoCpf, $novaNasc, $novoGenero, $caminhoFoto, $usuario['cod']]);
 
-        $caminhoFoto = "uploads/" . $nomeFoto;
-
-        // Atualiza no banco
-        $stmt = $pdo->prepare("UPDATE usuarios SET Foto = ? WHERE cod = ?");
-        $stmt->execute([$caminhoFoto, $usuario['cod']]);
-
-        $usuario['Foto'] = $caminhoFoto;
-        $_SESSION['usuario'] = $usuario;
+            $mensagemSucesso = "Perfil atualizado com sucesso!";
+            $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE cod = ?");
+            $stmt->execute([$usuario['cod']]);
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['usuario'] = $usuario;
+        }
     }
 }
 
-// Editar perfil
-if (isset($_POST['editar'])) {
-    $novoNome = trim($_POST['nome']);
-    $novoEmail = trim($_POST['email']);
-
-    if ($novoNome && $novoEmail) {
-        $stmt = $pdo->prepare("UPDATE usuarios SET Nome = ?, Email = ? WHERE cod = ?");
-        $stmt->execute([$novoNome, $novoEmail, $usuario['cod']]);
-
-        $usuario['Nome'] = $novoNome;
-        $usuario['Email'] = $novoEmail;
-        $_SESSION['usuario'] = $usuario;
-    }
-}
-
-// Excluir perfil
+// Botão Excluir
 if (isset($_POST['excluir'])) {
     $stmt = $pdo->prepare("DELETE FROM usuarios WHERE cod = ?");
     $stmt->execute([$usuario['cod']]);
-
     session_destroy();
     header("Location: formLogin.php");
     exit;
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Perfil</title>
-    <style>
-        body {
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: url('img/saudebackground.png') no-repeat center center fixed;
-            background-size: cover;
-        }
-        #geral {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            background: rgba(255,255,255,0.92);
-            border-radius: 18px;
-            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.18);
-            padding: 40px 32px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-        }
-        h2 {
-            color: #1976d2;
-        }
-        .foto {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid #1976d2;
-            margin-bottom: 16px;
-        }
-        input[type="file"], input[type="text"], input[type="email"] {
-            margin: 10px 0;
-            padding: 8px;
-            width: 95%;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(90deg, #1976d2 0%, #26c6da 100%);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
-            transition: background 0.2s;
-            margin-top: 8px;
-        }
-        button:hover {
-            background: linear-gradient(90deg, #1565c0 0%, #00acc1 100%);
-        }
-        .btn-excluir {
-            background: linear-gradient(90deg, #e53935 0%, #d32f2f 100%);
-        }
-        .btn-excluir:hover {
-            background: linear-gradient(90deg, #c62828 0%, #b71c1c 100%);
-        }
-        a {
-            display: block;
-            margin-top: 12px;
-            color: #1976d2;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="css/perfil.css">
 </head>
 <body>
 <div id="geral">
     <div class="container">
         <h2>Bem-vindo, <?php echo htmlspecialchars($usuario['Nome']); ?>!</h2>
-        <p>Email: <?php echo htmlspecialchars($usuario['Email']); ?></p>
 
-        <?php if (!empty($usuario['Foto'])): ?>
-            <img src="<?php echo $usuario['Foto']; ?>" alt="Foto de perfil" class="foto">
-        <?php else: ?>
-            <p>Sem foto de perfil</p>
+        <?php if ($mensagemSucesso): ?>
+            <div class="sucesso"><?php echo htmlspecialchars($mensagemSucesso); ?></div>
         <?php endif; ?>
 
-        <!-- Upload da Foto -->
-        <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="foto" accept="image/*">
-            <button type="submit">Adicionar/Alterar Foto</button>
-        </form>
+        <?php if (!empty($erros)): ?>
+            <div class="erros">
+                <ul>
+                    <?php foreach ($erros as $erro): ?>
+                        <li><?php echo htmlspecialchars($erro); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
 
-        <!-- Editar Perfil -->
+        <img src="<?php echo htmlspecialchars($usuario['Foto'] ?? 'img/default.png'); ?>" alt="Foto de perfil" class="foto">
+
+        <!-- Botão para ativar edição -->
+        <button type="button" id="btnEditar">Editar Perfil</button>
+
+        <!-- Seção escondida com formulário -->
+        <div id="editarSection">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="file" name="foto" accept="image/*">
+                <input type="text" name="nome" value="<?php echo htmlspecialchars($usuario['Nome']); ?>">
+                <input type="email" name="email" value="<?php echo htmlspecialchars($usuario['Email']); ?>">
+                <input type="text" name="telefone" value="<?php echo htmlspecialchars($usuario['Telefone']); ?>">
+                <input type="text" name="cpf" value="<?php echo htmlspecialchars($usuario['cpf']); ?>">
+                <input type="date" name="nasc" value="<?php echo htmlspecialchars($usuario['nasc']); ?>">
+                <select name="genero">
+                    <option value="">Selecione...</option>
+                    <option value="Masculino" <?php echo ($usuario['genero'] === 'Masculino') ? 'selected' : ''; ?>>Masculino</option>
+                    <option value="Feminino" <?php echo ($usuario['genero'] === 'Feminino') ? 'selected' : ''; ?>>Feminino</option>
+                    <option value="Outro" <?php echo ($usuario['genero'] === 'Outro') ? 'selected' : ''; ?>>Outro</option>
+                </select>
+                <button type="submit" name="salvar">Salvar Alterações</button>
+            </form>
+        </div>
+
         <form method="POST">
-            <input type="text" name="nome" placeholder="Novo nome" value="<?php echo htmlspecialchars($usuario['Nome']); ?>">
-            <input type="email" name="email" placeholder="Novo email" value="<?php echo htmlspecialchars($usuario['Email']); ?>">
-            <button type="submit" name="editar">Editar Perfil</button>
+            <button type="submit" name="excluir" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir sua conta?')">Excluir Perfil</button>
         </form>
 
-        <!-- Excluir Perfil -->
-        <form method="POST">
-            <button type="submit" name="excluir" class="btn-excluir">Excluir Perfil</button>
-        </form>
-
-        <a href="logout.php">Sair</a>
+        <a href="Menu.php">Sair</a>
     </div>
 </div>
+
+<script>
+document.getElementById('btnEditar').addEventListener('click', () => {
+    const section = document.getElementById('editarSection');
+    section.style.display = section.style.display === 'none' ? 'block' : 'none';
+});
+</script>
 </body>
 </html>
