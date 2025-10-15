@@ -69,6 +69,10 @@
         <h1 class="display-5 fw-bold mb-3">Cuidando de você com <span class="text-success">informação</span> e <span class="text-success">qualidade</span></h1>
         <p class="lead mb-4">A Saúdex é sua plataforma completa para informações confiáveis sobre saúde, promovendo bem-estar e qualidade de vida.</p>
         <a href="#Informacoes" class="btn btn-light btn-lg px-4 py-2">Explorar Conteúdo</a>
+        <a href="Mapa.html" class="btn btn-outline-light btn btn-lg">Localizar Hospitais Próximos</a>
+      </div>
+      <div class="col-lg-6 text-center">
+        <i class="fas fa-ambulance fa-9x text-light opacity-75"></i> <!-- Ícone -->
       </div>
     </div>
   </div>
@@ -202,8 +206,8 @@
         <div class="footer-links d-flex flex-column">
           <a href="Depressao.php" class="mb-2">Depressão</a>
           <a href="Ansiedade.php" class="mb-2">Ansiedade</a>
-          <a href="#" class="mb-2">Obesidade</a>
-          <a href="#" class="mb-2">Diabetes</a>
+          <a href="Obesidade.php" class="mb-2">Obesidade</a>
+          <a href="Diabetes.php" class="mb-2">Diabetes</a>
         </div>
       </div>
       <div class="col-lg-3 mb-4">
@@ -220,15 +224,15 @@
         <p class="mb-0">&copy; 2025 Saúdex. Todos os direitos reservados.</p>
       </div>
       <div class="col-md-6 text-md-end">
-        <a href="#" class="text-light me-3">Política de Privacidade</a>
-        <a href="#" class="text-light">Termos de Uso</a>
+        <a href="Politicas.php" class="text-light me-3">Política de Privacidade</a>
+        <a href="Termos.php" class="text-light">Termos de Uso</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://unpkg.com/lucide@latest"></script>
 <script src="js/notificacoes.js"></script>
 
 <script>
@@ -254,3 +258,5 @@
       }
   });
 </script>
+</body>
+</html>

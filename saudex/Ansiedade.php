@@ -32,7 +32,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-8">
                         <span class="hero-badge"><i class="fas fa-heartbeat me-2"></i>Saúde Mental</span>
-                        <h1 class="display-5 fw-bold mb-3">Entendendo a Ansiedade</h1>
+                        <h1 class="display-5 fw-bold mb-3">Compreendendo a Ansiedade</h1>
                         <p class="lead mb-4">A ansiedade é uma resposta natural do corpo ao estresse. No entanto, quando se torna intensa, persistente e interfere nas atividades diárias, pode ser considerada um transtorno de ansiedade.</p>
                         <div class="d-flex flex-wrap gap-3">
                             <a href="#sintomas" class="btn btn-light btn-lg">Ver Sintomas</a>
@@ -212,16 +212,18 @@
                 <div class="col-lg-3 col-md-6 mb-4">
                     <h5 class="mb-3">Condições</h5>
                     <div class="footer-links d-flex flex-column">
-                        <a href="Depressao.php" class="mb-2">Depressão</a>
-                        <a href="#" class="mb-2">Ansiedade</a>
-                        <a href="#" class="mb-2">Obesidade</a>
-                        <a href="#" class="mb-2">Diabetes</a>
+                          <a href="Depressao.php" class="mb-2">Depressão</a>
+                        <a href="Ansiedade.php" class="mb-2">Ansiedade</a>
+                        <a href="Obesidade.php" class="mb-2">Obesidade</a>
+                        <a href="Diabetes.php" class="mb-2">Diabetes</a>
                     </div>
                 </div>
                 <div class="col-lg-3 mb-4">
                     <h5 class="mb-3">Contato</h5>
-                    <p><i class="fas fa-envelope me-2"></i> contato@saudex.com</p>
-                    <p><i class="fas fa-phone me-2"></i> (11) 9999-9999</p>
+                    <div class="footer-links d-flex flex-column">
+                        <p class="mb-2"><i class="fas fa-envelope me-2"></i> contato@saudex.com</p>
+                        <p class="mb-2"><i class="fas fa-phone me-2"></i> (11) 9999-9999</p>
+                    </div>
                 </div>
             </div>
             <hr class="my-4" style="border-color: #475569;">

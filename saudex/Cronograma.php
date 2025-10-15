@@ -87,8 +87,29 @@
                 <li>Aprimoramento no Menu</li>
             </ul>
         </div>
-
-
+        
+         <div class="card">
+            <h3>Semana 8:  </h3>
+            <p><strong>Objetivo:</strong></p>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Semana 9:  </h3>
+            <p><strong>Objetivo:</strong></p>
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        
         <div class="card equipe">
             <h3>Equipe do Projeto</h3>
             <ul>
