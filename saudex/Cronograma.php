@@ -89,23 +89,44 @@
         </div>
         
          <div class="card">
-            <h3>Semana 8:  </h3>
-            <p><strong>Objetivo:</strong></p>
+            <h3>Semana 8: Implementar Perfil de Usuário </h3>
+            <p><strong>Objetivo:</strong> Criar funcionalidades básicas de gerenciamento de usuários e interface admin, priorizando design responsivo e segurança. </p>
+            <ul>
+                <li>Desenvolver página de perfil com design pronto (foto, nome) e funções de edição (alterar email/senha). </li>
+                <li>Desenvolver página para ansiedade. </li>
+                <li></li>
+            </ul>      
+        </div>
+
+        <div class="card">
+            <h3>Semana 9: Otimizar Posts/Notícias</h3>
+            <p><strong>Objetivo:</strong> Melhorar a usabilidade com cards interativos para notícias. </p>
             <ul>
                 <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li>Integrar exportação de lista de usuarios para PDF (botão que gera relatório dos resultados). </li>
+                <li>Troca do design dos posts e pagina de noticias. </li>
+                <li>Testar cards em diferentes telas (tablet, celular). </li>
             </ul>
         </div>
-        
+
         <div class="card">
-            <h3>Semana 9:  </h3>
-            <p><strong>Objetivo:</strong></p>
+            <h3>Semana 10: Implementar Notificações por Email e no Site</h3>
+            <p><strong>Objetivo:</strong> Adicionar sistema de notificações. </p>
             <ul>
+                <li>Configurar envio de emails automáticos para usuários sobre novas notícias. </li>
                 <li></li>
-                <li></li>
-                <li></li>
+                <li>Adicionar notificações no menu do site (com contador) </li>
+                <li>Desenvolver página para diabetes</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3>Semana 11: Criar Mapa de Locais e Páginas de Saúde</h3>
+            <p><strong>Objetivo:</strong> Expandir o site com ferramentas externas. </p>
+            <ul>
+                <li>Desenvolver página com mapa (Google Maps) mostrando hospitais/farmácias/clínicas próximos ao IP e CEP. </li>
+                <li>Adicionar filtros no mapa e informações detalhadas. </li>
+                <li>Desenvolver página para obesidade. </li>
                 <li></li>
             </ul>
         </div>

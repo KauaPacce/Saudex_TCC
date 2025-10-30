@@ -1,0 +1,120 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #10b981;
+      --green-dark: #047857;
+      --bg-gradient: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      --text-color: #333;
+      --radius: 14px;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #fff;
+      text-align: center;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    header h1 {
+      color: var(--green-dark);
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: #555;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1rem;
+    }
+
+    .terms-card {
+      background-color: #fff;
+      padding: 3rem 2rem;
+      border-radius: var(--radius);
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .terms-card h2 {
+      color: var(--green-dark);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      border-left: 5px solid var(--green);
+      padding-left: 0.6rem;
+    }
+
+    .terms-card p {
+      margin-bottom: 1rem;
+      color: #444;
+    }
+
+    .terms-card ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .terms-card li {
+      margin-bottom: 0.6rem;
+    }
+
+    a {
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: var(--green);
+      color: #fff;
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: var(--green-dark);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      background-color: #ffffff;
+      color: #666;
+      padding: 1rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #ddd;
+    }
+
+    @media (max-width: 600px) {
+      .terms-card {
+        padding: 2rem 1.5rem;
+      }
+    }

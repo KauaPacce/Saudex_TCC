@@ -300,5 +300,100 @@ class clssaudex
             return false;
         }
     }
+
+    // -- metodo Pesquisar Por Email ----------------------------------
+    public function PesquisarPorEmail($Email) 
+    {
+        try {
+            $sql = "SELECT cod, Nome, Email FROM usuarios WHERE Email = :Email";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':Email', $Email);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            error_log("Erro em PesquisarPorEmail: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // -- metodo Inserir Password Reset ----------------------------------
+    public function InserirPasswordReset($userId, $token, $expires) 
+    {
+        try {
+            $sql_delete = "DELETE FROM password_resets WHERE user_id = :user_id";
+            $stmt_delete = $this->conn->prepare($sql_delete);
+            $stmt_delete->bindParam(':user_id', $userId);
+            $stmt_delete->execute();
+
+            $sql = "INSERT INTO password_resets (user_id, token, expires_at) VALUES (:user_id, :token, :expires_at)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->bindParam(':token', $token);
+            $stmt->bindParam(':expires_at', $expires);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erro em InserirPasswordReset: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // -- metodo Validar Token Reset ----------------------------------
+    public function ValidarTokenReset($token) 
+    {
+        try {
+            $sql = "SELECT user_id, expires_at FROM password_resets WHERE token = :token";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':token', $token);
+            $stmt->execute();
+            
+            if ($stmt->rowCount() > 0) {
+                $data = $stmt->fetch(PDO::FETCH_ASSOC);
+                if (strtotime($data['expires_at']) > time()) {
+                    return $data; 
+                } else {
+                    $this->DeletarTokenReset($token);
+                    return false;
+                }
+            }
+            return false; 
+        } catch (PDOException $e) {
+            error_log("Erro em ValidarTokenReset: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    // -- metodo Deletar Token Reset ----------------------------------
+    public function DeletarTokenReset($token) 
+    {
+        try {
+            $sql = "DELETE FROM password_resets WHERE token = :token";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':token', $token);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            error_log("Erro em DeletarTokenReset: " . $e->getMessage());
+        }
+    }
+
+    // -- metodo Atualizar Senha ----------------------------------
+    public function AtualizarSenha($userId, $novaSenhaHash) 
+    {
+        try {
+            $sql = "UPDATE usuarios SET Senha = :Senha WHERE cod = :cod";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':Senha', $novaSenhaHash);
+            $stmt->bindParam(':cod', $userId);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("Erro em AtualizarSenha: " . $e->getMessage());
+            return false;
+        }
+    }
 }
 ?>

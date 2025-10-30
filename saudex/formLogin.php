@@ -22,6 +22,9 @@
             <div class="row">
                 <button type="submit">Entrar</button>
             </div>
+            <div class="forgot-link">
+                <a href="forgot-password.php">Esqueci minha senha</a> 
+            </div>
             <div class="login-link">
                 Não possui uma conta? <a href="formUsuarios.php">Cadastre-se</a>
             </div>
